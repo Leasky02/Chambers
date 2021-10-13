@@ -131,11 +131,36 @@ public class Gun : MonoBehaviour
                     myAnimator.Play("AimEnd");
             }
         }
-
+        //if camera should be zoomed in
         if(isZoomed)
-            fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, FOV, Time.deltaTime * 7);
+        {
+            //then if the player is sprinting
+            if (!player.GetComponent<PlayerMovement>().sprinting)
+            {
+                //Zoom to FOV + 10
+                fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, FOV + 10, Time.deltaTime * 7);
+            }
+            else
+            {
+                //if so, zoom to FOV
+                fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, FOV, Time.deltaTime * 7);
+            }
+        }
+        //if camera should be zoomed out
         if(!isZoomed)
-            fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, 60, Time.deltaTime * 7);
+        {
+            //then if player is sprinting
+            if(player.GetComponent<PlayerMovement>().sprinting)
+            {
+                //zoom to normal + 10
+                fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, 70, Time.deltaTime * 7);
+            }
+            else
+            {
+                //if not, zoom to normal
+                fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, 60, Time.deltaTime * 7);
+            }
+        }
 
         //if no ammo, reload automatically
         if(loadedAmmo == 0 && totalAmmo > 0 && reloading == false)

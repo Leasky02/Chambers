@@ -7,11 +7,13 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
     //player movement variables
     public float speed = 12f;
+    public float sprintSpeed = 1f;
+    public bool sprinting = false;
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
 
-    //walking audio
-    [SerializeField] private AudioClip walkingSound;
+    //camera
+    [SerializeField] public Camera fpsCam;
 
     //holds position of ground check object
     public Transform groundCheck;
@@ -27,13 +29,25 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            sprintSpeed = 2f;
+            //set FOV up for sprinting
+            sprinting = true;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            sprintSpeed = 1f;
+            sprinting = false;
+        }
+
         //setting bool to see if player is on the ground repeatedly
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         //if player is on the ground and the velocity of the player is moving down
         if (isGrounded && velocity.y < 0)
         {
-            velocity.y = -2f;
+            velocity.y = -4f;
         }
 
         float x = Input.GetAxis("Horizontal");
@@ -42,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
         //position to move to in the frame
         Vector3 move = transform.right * x + transform.forward * z;
         //gets character controller and moves player to new position according to speed
-        controller.Move(move * speed * Time.deltaTime);
+        controller.Move(move * speed * sprintSpeed * Time.deltaTime);
         //if player jumps with space bar
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
