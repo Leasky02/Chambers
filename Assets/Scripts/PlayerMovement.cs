@@ -7,10 +7,10 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
     //player movement variables
     public float speed = 12f;
-    public float sprintSpeed = 1f;
+    [SerializeField] private float sprintSpeed = 1f;
     public bool sprinting = false;
-    public float gravity = -9.81f;
-    public float jumpHeight = 3f;
+    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float jumpHeight = 3f;
 
     //camera
     [SerializeField] public Camera fpsCam;

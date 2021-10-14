@@ -95,10 +95,6 @@ public class Gun : MonoBehaviour
         //if right mouse button is pressed
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            //slow down player speed
-            player.GetComponent<PlayerMovement>().speed *= 0.5f;
-            //lower mouse sensetivity
-            fpsCam.GetComponent<MoveLook>().mouseSensetivity *= 0.5f;
             //allows camera to zoom in to 40 FOV
             isZoomed = true;
 
@@ -120,10 +116,6 @@ public class Gun : MonoBehaviour
             //zoom camera out
             if (zoomOut)
             {
-                //slow down player speed
-                player.GetComponent<PlayerMovement>().speed /= 0.5f;
-                //lower mouse sensetivity
-                fpsCam.GetComponent<MoveLook>().mouseSensetivity /= 0.5f;
                 //play animation
                 if (isPistol)
                     myAnimator.Play("AimEndPistol");
@@ -135,16 +127,21 @@ public class Gun : MonoBehaviour
         if(isZoomed)
         {
             //then if the player is sprinting
-            if (!player.GetComponent<PlayerMovement>().sprinting)
+            if (player.GetComponent<PlayerMovement>().sprinting)
             {
-                //Zoom to FOV + 10
-                fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, FOV + 10, Time.deltaTime * 7);
+                //Zoom to FOV + 20
+                fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, FOV + 20, Time.deltaTime * 7f);
             }
             else
             {
                 //if so, zoom to FOV
                 fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, FOV, Time.deltaTime * 7);
             }
+
+            //slow down player speed
+            player.GetComponent<PlayerMovement>().speed = 3.5f;
+            //lower mouse sensetivity
+            fpsCam.GetComponent<MoveLook>().mouseSensetivity = 200f;
         }
         //if camera should be zoomed out
         if(!isZoomed)
@@ -152,20 +149,25 @@ public class Gun : MonoBehaviour
             //then if player is sprinting
             if(player.GetComponent<PlayerMovement>().sprinting)
             {
-                //zoom to normal + 10
-                fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, 70, Time.deltaTime * 7);
+                //zoom to normal + 20
+                fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, 80, Time.deltaTime * 7);
             }
             else
             {
                 //if not, zoom to normal
                 fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, 60, Time.deltaTime * 7);
             }
+
+            //slow down player speed
+            player.GetComponent<PlayerMovement>().speed = 7f;
+            //lower mouse sensetivity
+            fpsCam.GetComponent<MoveLook>().mouseSensetivity = 400f;
         }
 
         //if no ammo, reload automatically
         if(loadedAmmo == 0 && totalAmmo > 0 && reloading == false)
         {
-            Reload();
+            Invoke("Reload", 0.3f);
         }
 
         //update ammo count
@@ -178,6 +180,26 @@ public class Gun : MonoBehaviour
         //play muzzle flash particles
         muzzleFlash.Play();
 
+        //if camera is zoomed in...
+        if(isZoomed)
+        {
+            if(isPistol)
+            {
+                //play shooting animation
+                myAnimator.Play("zoomShootPistol");
+            }
+            else
+            {
+                //play shooting animation
+                myAnimator.Play("zoomShootRifle");
+            }
+        }
+        //else (camera is not zoomed in)
+        else
+        {
+            //play shooting animation
+            myAnimator.Play("shoot");
+        }
         //play shoot sound
         myAudioSource.clip = gunShotSound;
         myAudioSource.Play();
