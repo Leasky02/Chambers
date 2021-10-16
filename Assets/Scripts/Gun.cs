@@ -7,10 +7,17 @@ public class Gun : MonoBehaviour
     [SerializeField] private GameObject player;
     //contains if object is pistol or rifle
     [SerializeField] private bool isPistol;
+    //variable to stop hold to shoot for pistol
+    private bool canShoot = true;
     
     //defines if camera should zoom out
     public bool isZoomed = false;
     public bool zoomOut;
+    //variable if aim has been released
+    private bool aimReleased;
+    //variable if aim has been released
+    private bool aimPressed;
+
     [SerializeField] private float FOV = 40f;
     //damage and range for gun
     [SerializeField] private float damage = 10f;
@@ -32,7 +39,7 @@ public class Gun : MonoBehaviour
     private Animator myAnimator;
     //total ammo you can reload with
     [SerializeField] private int totalAmmo;
-    [SerializeField] private bool reloading = false;
+    public bool reloading = false;
     //text box to show ammo count
     [SerializeField] private Text loadedAmmoDisplay;
     [SerializeField] private Text totalAmmoDisplay;
@@ -57,14 +64,19 @@ public class Gun : MonoBehaviour
         //if left mouse click, then shoot (pistol)
         if(isPistol)
         {
-            if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
+            if (Input.GetAxisRaw("Shoot") == 1 && Time.time >= nextTimeToFire)
             {
-                //sets next time to fire to current time + 1 second divided by fire rate (shots per second)
-                nextTimeToFire = Time.time + 1f / fireRate;
-                //if ther is ammo and gun isnt reloading
-                if (loadedAmmo > 0 && !reloading)
+                //if gun hasnt already been shot when trigger is first pressed
+                if(canShoot)
                 {
-                    Shoot();
+                    //sets next time to fire to current time + 1 second divided by fire rate (shots per second)
+                    nextTimeToFire = Time.time + 1f / fireRate;
+                    //if ther is ammo and gun isnt reloading
+                    if (loadedAmmo > 0 && !reloading)
+                    {
+                        Shoot();
+                    }
+                    canShoot = false;
                 }
             }
         }
@@ -72,7 +84,8 @@ public class Gun : MonoBehaviour
         //if left mouse click, then shoot (pistol)
         if (!isPistol)
         {
-            if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
+            //if right trigger has been pressed
+            if (Input.GetAxisRaw("Shoot") == 1 && Time.time >= nextTimeToFire)
             {
                 //sets next time to fire to current time + 1 second divided by fire rate (shots per second)
                 nextTimeToFire = Time.time + 1f / fireRate;
@@ -83,44 +96,65 @@ public class Gun : MonoBehaviour
                 }
             }
         }
+        //if right trigger has been pressed
+        if (Input.GetAxisRaw("Shoot") == 0 && Time.time >= nextTimeToFire)
+        {
+            canShoot = true;
+        }
+
 
         //if reload is pressed
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetButtonDown("Reload"))
         {
             //if there is ammo to reload with, reload
             if(totalAmmo > 0 && !reloading && loadedAmmo < maxAmmo)
                 Reload();
         }
 
-        //if right mouse button is pressed
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        //if aim button is pressed
+        if (Input.GetAxisRaw("Aim") == 1 || Input.GetButtonDown("Aim"))
         {
-            //allows camera to zoom in to 40 FOV
-            isZoomed = true;
-
-            //allows camera to zoom out
-            zoomOut = true;
-            //play animation
-            if(isPistol)
-                myAnimator.Play("AimStartPistol");
-            else
-                myAnimator.Play("AimStart");
-        }
-
-        //if right mouse button is released
-        if (Input.GetKeyUp(KeyCode.Mouse1))
-        {
-            //sets camera to zoom out to 60 FOV
-            isZoomed = false;
-
-            //zoom camera out
-            if (zoomOut)
+            if(!aimPressed && !reloading)
             {
+                Debug.Log("aim start");
+                //allows camera to zoom in to 40 FOV
+                isZoomed = true;
+
+                //allows camera to zoom out
+                zoomOut = true;
                 //play animation
                 if (isPistol)
-                    myAnimator.Play("AimEndPistol");
+                    myAnimator.Play("AimStartPistol");
                 else
-                    myAnimator.Play("AimEnd");
+                    myAnimator.Play("AimStart");
+
+                //aim pressed is true
+                aimPressed = true;
+                aimReleased = false;
+            }
+
+        }
+
+        //if aim button is released
+        if (Input.GetAxisRaw("Aim") == 0 || Input.GetButtonUp("Aim"))
+        {
+            if(!aimReleased && !reloading)
+            {
+                //sets camera to zoom out to 60 FOV
+                isZoomed = false;
+
+                //zoom camera out
+                if (zoomOut)
+                {
+                    //play animation
+                    if (isPistol)
+                        myAnimator.Play("AimEndPistol");
+                    else
+                        myAnimator.Play("AimEnd");
+                }
+
+                aimPressed = false;
+                aimReleased = true;
             }
         }
         //if camera should be zoomed in

@@ -21,8 +21,8 @@ public class MoveLook : MonoBehaviour
     void Update()
     {
         //create variables to hold the direction of each axis movement * mousesensetivity and time
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensetivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensetivity * Time.deltaTime;
+        float mouseX = Input.GetAxis("LookX") * mouseSensetivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("LookY") * mouseSensetivity * Time.deltaTime;
 
         xRotation -= mouseY;
         //stops player from looking too far up or down

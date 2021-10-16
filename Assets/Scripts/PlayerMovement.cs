@@ -7,8 +7,13 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
     //player movement variables
     public float speed = 12f;
+    //sprint multiplier
     [SerializeField] private float sprintSpeed = 1f;
+    //contains if player is sprinting
     public bool sprinting = false;
+    //if player is idle
+    private bool idle;
+
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 3f;
 
@@ -26,16 +31,17 @@ public class PlayerMovement : MonoBehaviour
     //contains if the player is on the ground or not
     bool isGrounded;
 
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetButtonDown("Sprint"))
         {
-            sprintSpeed = 2f;
+            sprintSpeed = 1.8f;
             //set FOV up for sprinting
             sprinting = true;
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (idle == true && sprinting)
         {
             sprintSpeed = 1f;
             sprinting = false;
@@ -52,6 +58,15 @@ public class PlayerMovement : MonoBehaviour
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
+        //if player isnt moving
+        if(Input.GetAxis("Horizontal") < 0.4 && Input.GetAxis("Vertical") < 0.4)
+        {
+            idle = true;
+        }
+        else
+        {
+            idle = false;
+        }
 
         //position to move to in the frame
         Vector3 move = transform.right * x + transform.forward * z;
