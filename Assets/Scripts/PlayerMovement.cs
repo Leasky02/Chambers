@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Sprint"))
+        if (Input.GetButton("Sprint"))
         {
             sprintSpeed = 1.5f;
             //set FOV up for sprinting
