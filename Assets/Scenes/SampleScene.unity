@@ -5294,6 +5294,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 327817632}
     m_Modifications:
+    - target: {fileID: 994876401603964761, guid: 9239c01031df860498fabfaa0ea3c770, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1019665452011963223, guid: 9239c01031df860498fabfaa0ea3c770, type: 3}
       propertyPath: m_Name
       value: Corridor_connector (2)
@@ -14533,6 +14537,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 327817632}
     m_Modifications:
+    - target: {fileID: 994876401603964761, guid: 9239c01031df860498fabfaa0ea3c770, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1019665452011963223, guid: 9239c01031df860498fabfaa0ea3c770, type: 3}
       propertyPath: m_Name
       value: Corridor_connector (3)
@@ -28322,7 +28330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d6992037194df540ac61741f5af143e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensetivity: 250
+  mouseSensetivity: 175
   playerBody: {fileID: 908906950}
 --- !u!4 &963564945 stripped
 Transform:
@@ -43086,7 +43094,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 994876401603964761, guid: 9239c01031df860498fabfaa0ea3c770, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1019665452011963223, guid: 9239c01031df860498fabfaa0ea3c770, type: 3}
       propertyPath: m_Name
@@ -48171,9 +48179,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 327817632}
     m_Modifications:
+    - target: {fileID: 994876401603964761, guid: 9239c01031df860498fabfaa0ea3c770, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1019665452011963223, guid: 9239c01031df860498fabfaa0ea3c770, type: 3}
       propertyPath: m_Name
       value: Corridor_connector (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300862572967054713, guid: 9239c01031df860498fabfaa0ea3c770, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3384758405932845061, guid: 9239c01031df860498fabfaa0ea3c770, type: 3}
       propertyPath: m_IsActive
