@@ -106,7 +106,7 @@ public class DoorwayRandomiser : MonoBehaviour
                 //set open state to true
                 openState = true;
             }
-            Invoke("ChangeWall", 5f);
+            Invoke("ChangeWall", Random.Range(20f,60f));
         }
     }
 }
