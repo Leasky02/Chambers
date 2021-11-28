@@ -5,6 +5,7 @@ using UnityEngine.Animations;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //variable containing the character controller
     public CharacterController controller;
     //player movement variables
     public float speed = 12f;
@@ -13,13 +14,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float airSpeed = 1f;
     //sprint multiplier
     [SerializeField] private float sprintSpeed = 1f;
-
-    [SerializeField] private bool applyAirSpeed;
     //contains if player is sprinting
     public bool sprinting = false;
     //if player is idle
     private bool idle;
-
+    //variables containing gravity and jump height inputs
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 3f;
 
@@ -47,8 +46,10 @@ public class PlayerMovement : MonoBehaviour
     private bool animationPlaying;
     private string movementAnimation = "walking";
 
+    //start is called once at the start
     private void Start()
     {
+        //set component variables
         myAudioSource = GetComponent<AudioSource>();
         myAnimator = GetComponent<Animator>();
     }
@@ -56,8 +57,13 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Sprint"))
+        //setting bool to see if player is on the ground repeatedly
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        //test if player presses button to sprint and is on the ground
+        if (Input.GetButton("Sprint") && isGrounded)
         {
+            //set sprint speed
             sprintSpeed = 1.5f;
             //set FOV up for sprinting
             sprinting = true;
@@ -68,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
         //if player has stopped moving, stop sprinting
         if (idle == true && sprinting)
         {
+            //set sprint speed to normal
             sprintSpeed = 1f;
             sprinting = false;
 
@@ -76,17 +83,14 @@ public class PlayerMovement : MonoBehaviour
             movementAnimation = "walking";
         }
 
-        //setting bool to see if player is on the ground repeatedly
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
         //if player is on the ground and the velocity of the player is moving down
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -4f;
         }
 
-        //if not on ground, slow player movement by air speed
-        if(!isGrounded)
+        //if not on ground and sprinting, slow player movement by air speed
+        if(!isGrounded && !sprinting)
         {
             airSpeed = 0.6f;
         }
@@ -103,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
                 myAudioSource.pitch = 1.5f;
             else
                 myAudioSource.pitch = 2.25f;
-
+            //if a sound is NOT already playing, play a random footstep sound
             if (!myAudioSource.isPlaying)
             {
                 //set audio clip randomly
@@ -111,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
                 //play walking sound
                 myAudioSource.Play();
             }
-
+            //if the walking animation is NOT being played, start walking
             if(!animationPlaying)
             {
                 myAnimator.Play(movementAnimation);
@@ -121,10 +125,9 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             //stop footsteps
-            {
-                myAudioSource.Stop();
-            }
+            myAudioSource.Stop();
         }
+        //set x and z equal to Axis input
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
@@ -160,6 +163,7 @@ public class PlayerMovement : MonoBehaviour
         //if player is not on ground or not moving
         if(!isGrounded || Input.GetAxis("Horizontal") + Input.GetAxis("Vertical") == 0)
         {
+            //sest player to static
             myAnimator.Play("static");
             animationPlaying = false;
         }
