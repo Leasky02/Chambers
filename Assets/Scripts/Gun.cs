@@ -253,6 +253,7 @@ public class Gun : MonoBehaviour
             //if the hit object DOES have a rigidbody...
             if(hit.rigidbody != null)
             {
+                Debug.Log("Hit");
                 hit.rigidbody.AddForce(-hit.normal * force);
             }
             //creates iumpact particles where hit
