@@ -19,6 +19,6 @@ public class ArtifactData : MonoBehaviour
         value = Random.Range(valueLimits[0], valueLimits[1]);
 
         //set Y rotation randomly
-        transform.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+        transform.rotation = Quaternion.Euler(Random.Range(0f,180f), Random.Range(0f, 360f), 0f);
     }
 }

@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1961819311156460579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6439456036274662951}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6439456036274662951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961819311156460579}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3199815952969565018}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3199815951276191693
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,6 +147,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3199815952969565018}
+  - component: {fileID: 3217407294358675105}
   m_Layer: 0
   m_Name: Room8(large,3)
   m_TagString: Untagged
@@ -138,9 +169,37 @@ Transform:
   - {fileID: 3199815952669719442}
   - {fileID: 3199815952976141442}
   - {fileID: 3199815951276191692}
+  - {fileID: 6439456036274662951}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3217407294358675105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3199815952969565019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a153f01efc7644fa4c64efbe88e5c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnAttempts: 2
+  roomX1: -9
+  roomX2: 5
+  roomZ1: -1
+  roomZ2: 21
+  ArtifactPrefabs:
+  - {fileID: 4738478126641464918, guid: 398a51736b8e4c14080f428843062906, type: 3}
+  - {fileID: 4905190641976156884, guid: 149cc8a961448824e9f04c088a18a6ca, type: 3}
+  - {fileID: 3912203739930516682, guid: fbd7f4b18a5bbca408ca53517997f037, type: 3}
+  - {fileID: 483370239750793921, guid: 4906eb92ce56c7e4c95c5b993d1d1698, type: 3}
+  - {fileID: 5526751474925705491, guid: 6e3fb68605bdc4f4b851f729e0e63553, type: 3}
+  - {fileID: 9041207568455947197, guid: 91b15917556ebac40b5adb3c3d49f4da, type: 3}
+  - {fileID: 638574308516756730, guid: cfc6a13758e2fe443926acf5a3763a8d, type: 3}
+  - {fileID: 8451510731685207159, guid: cb2a21f02429681469cbd0335f99334f, type: 3}
+  - {fileID: 2948358927151717631, guid: 3e6460a7bb3b3c9488a38b8d66d4c1d1, type: 3}
 --- !u!1 &3199815952976141443
 GameObject:
   m_ObjectHideFlags: 0
