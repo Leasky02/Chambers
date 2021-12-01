@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3757576095656022492}
   - component: {fileID: 3473027286521875416}
   - component: {fileID: 4034031946412312613}
+  - component: {fileID: 7310005971416023419}
   m_Layer: 0
   m_Name: Vase5_Artifact
   m_TagString: Untagged
@@ -47,9 +48,9 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!1818360608 &3473027286521875416
 PositionConstraint:
   m_ObjectHideFlags: 0
@@ -84,6 +85,27 @@ MonoBehaviour:
   value: 0
   valueLimits: 6400000082000000
   artifactClass: 0
+--- !u!114 &7310005971416023419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2948358927151717631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 900e7eb4c4839e24e9ab46c4b50c36ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupRange: 5
+  dropForwardForce: 10
+  dropUpwardForce: 10
+  fpsCam: {fileID: 0}
+  player: {fileID: 0}
+  guns:
+  - {fileID: 0}
+  - {fileID: 0}
+  artifactContainer: {fileID: 0}
 --- !u!65 &6447363775419817159
 BoxCollider:
   m_ObjectHideFlags: 0

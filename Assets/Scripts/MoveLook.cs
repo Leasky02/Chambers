@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveLook : MonoBehaviour
 {
     //controls sensetivity of mouse
-    public float mouseSensetivity = 100f;
+    public float mouseSensetivity;
     //contains information of parent player object transform component
     public Transform playerBody;
     //contains how much camera should rotate each frame. 0f is default but will change

@@ -116,7 +116,6 @@ public class Gun : MonoBehaviour
         {
             if(!aimPressed && !reloading)
             {
-                Debug.Log("aim start");
                 //allows camera to zoom in to 40 FOV
                 isZoomed = true;
 
@@ -175,7 +174,7 @@ public class Gun : MonoBehaviour
             //slow down player speed
             player.GetComponent<PlayerMovement>().speed = 3.5f;
             //lower mouse sensetivity
-            fpsCam.GetComponent<MoveLook>().mouseSensetivity = 200f;
+            fpsCam.GetComponent<MoveLook>().mouseSensetivity = 150f;
         }
         //if camera should be zoomed out
         if(!isZoomed)
@@ -192,10 +191,10 @@ public class Gun : MonoBehaviour
                 fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, 60, Time.deltaTime * 7);
             }
 
-            //slow down player speed
+            //speed up player speed
             player.GetComponent<PlayerMovement>().speed = 7f;
-            //lower mouse sensetivity
-            fpsCam.GetComponent<MoveLook>().mouseSensetivity = 400f;
+            //increase mouse sensetivity
+            fpsCam.GetComponent<MoveLook>().mouseSensetivity = 300f;
         }
 
         //if no ammo, reload automatically
