@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4000011104023492}
   - component: {fileID: 33000011181393266}
   - component: {fileID: 23000012094540264}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground + Mix 2x1 Flat
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -51,6 +51,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1

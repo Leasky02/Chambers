@@ -45,10 +45,8 @@ public class InventorySlot : MonoBehaviour
         
 
 
-        //set collider to gameobject
-        rb = gameObject.GetComponent<Rigidbody>();
         //set rigidbody to gameobject
-        coll = gameObject.transform.GetChild(0).GetComponent<BoxCollider>();
+        rb = gameObject.GetComponent<Rigidbody>();
         //get transform of self
         artifactPosition = gameObject.GetComponent<Transform>();
     }
@@ -69,88 +67,90 @@ public class InventorySlot : MonoBehaviour
             //do drop function
             Drop();
         }
-
     }
     //pick up item
     void PickUp()
     {
-        slotFull = true;
-        equipped = true;
-
-        //set layer to "Weapon" (7)
-        //this will stop it clipping into walls
-        gameObject.layer = LayerMask.NameToLayer("Weapon");
-
-        //make the artifact a child of the artifact container
-        transform.SetParent(artifactContainer.transform);
-        //set all positions to 0
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.Euler(Vector3.zero);
-        transform.localScale = Vector3.one;
-
-
-        //Make Rigidbody kinematic and boxcollider a trigger
-        rb.isKinematic = true;
-        coll.isTrigger = true;
-
-        //disable gun script
-        player.GetComponent<GunSelection>().enabled = false;
-
-        //set additional weight multiplier of player
-        player.GetComponent<PlayerMovement>().additionalWeight = gameObject.GetComponent<ArtifactData>().weightSpeedMultiplier;
-
-        //if gun 0 is active in the hierarchy...
-        if(guns[0].activeInHierarchy == true)
+        if(!slotFull)
         {
-            activeGun = 0;
-        }
-        else
-        {
-            activeGun = 1;
-        }
+            slotFull = true;
+            equipped = true;
 
-        //disable gun object
-        guns[0].SetActive(false);
-        guns[1].SetActive(false);
+            //set layer to "Weapon" (7)
+            //this will stop it clipping into walls
+            transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Weapon");
+
+            //make the artifact a child of the artifact container
+            transform.SetParent(artifactContainer.transform);
+            //set all positions to 0
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.Euler(Vector3.zero);
+
+            //Make Rigidbody kinematic and boxcollider a trigger
+            rb.isKinematic = true;
+
+            //disable gun script
+            player.GetComponent<GunSelection>().enabled = false;
+
+            //set additional weight multiplier of player
+            player.GetComponent<PlayerMovement>().additionalWeight = true;
+
+            //if gun 0 is active in the hierarchy...
+            if (guns[0].activeInHierarchy == true)
+            {
+                activeGun = 0;
+            }
+            else
+            {
+                activeGun = 1;
+            }
+
+            //disable gun object
+            guns[0].SetActive(false);
+            guns[1].SetActive(false);
+        }
     }
 
     void Drop()
     {
-        slotFull = false;
-        equipped = false;
-
-        //set layer to "Default" (0)
-        //this will stop it clipping into walls
-        gameObject.layer = LayerMask.NameToLayer("Default");
-
-        //set parent to null
-        transform.SetParent(null);
-
-        //Make Rigidbody NOT kinematic and boxcollider NOT a trigger
-        rb.isKinematic = false;
-        coll.isTrigger = false;
-
-        //object carries momentum of the player
-        rb.velocity = player.GetComponent<PlayerMovement>().velocity;
-
-        //add force to object to throw away
-        rb.AddForce(fpsCam.forward * dropForwardForce, ForceMode.Impulse);
-        rb.AddForce(fpsCam.up * dropUpwardForce, ForceMode.Impulse);
-
-        //disable gun script
-        player.GetComponent<GunSelection>().enabled = true;
-
-        //set additional weight multiplier of player
-        player.GetComponent<PlayerMovement>().additionalWeight = 1f;
-
-        //enable gun object
-        if (activeGun == 0)
+        if(slotFull)
         {
-            guns[0].SetActive(true);
-        }
-        else
-        {
-            guns[1].SetActive(true);
-        }
+            slotFull = false;
+            equipped = false;
+
+            //set layer to "Default" (0)
+            //this will stop it clipping into walls
+            transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Default");
+
+            //set parent to null
+            transform.SetParent(null);
+
+            //Make Rigidbody NOT kinematic and boxcollider NOT a trigger
+            rb.isKinematic = false;
+
+            //object carries momentum of the player
+            rb.velocity = player.GetComponent<PlayerMovement>().velocity;
+
+            //add force to object to throw away
+            rb.AddForce(fpsCam.forward * dropForwardForce, ForceMode.Impulse);
+            rb.AddForce(fpsCam.up * dropUpwardForce, ForceMode.Impulse);
+
+            //disable gun script
+            player.GetComponent<GunSelection>().enabled = true;
+
+            //set additional weight multiplier of player
+            player.GetComponent<PlayerMovement>().additionalWeight = false;
+
+            //enable gun object
+            if (activeGun == 0)
+            {
+                guns[0].SetActive(true);
+            }
+            else
+            {
+                guns[1].SetActive(true);
+            }
+        }    
+        
     }
 }

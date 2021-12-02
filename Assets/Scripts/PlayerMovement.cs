@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     //sprint multiplier
     [SerializeField] private float sprintSpeed = 1f;
     //artifact weight multiplier
-    [HideInInspector] public float additionalWeight = 1f;
+    [HideInInspector] public bool additionalWeight = false;
     //contains if player is sprinting
     public bool sprinting = false;
     //if player is idle
@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     //holds position of ground check object
     public Transform groundCheck;
     //contains information of the size of sphere to check around the ground check
-    public float groundDistance = 0.2f;
+    public float groundDistance = 0.1f;
     public LayerMask groundMask;
 
     //contains the velocity of the player
@@ -61,9 +61,9 @@ public class PlayerMovement : MonoBehaviour
     {
         //setting bool to see if player is on the ground repeatedly
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
+        Debug.Log(additionalWeight);
         //test if player presses button to sprint and is on the ground
-        if (Input.GetButton("Sprint") && isGrounded)
+        if (Input.GetButton("Sprint") && isGrounded && additionalWeight == false)
         {
             //set sprint speed
             sprintSpeed = 1.5f;
@@ -73,8 +73,8 @@ public class PlayerMovement : MonoBehaviour
             animationPlaying = false;
             movementAnimation = "sprinting";
         }
-        //if player has stopped moving, stop sprinting
-        if (idle == true && sprinting)
+        //if player has stopped moving, or picked up an item stop sprinting
+        if ((idle == true && sprinting) || additionalWeight == true)
         {
             //set sprint speed to normal
             sprintSpeed = 1f;
@@ -83,6 +83,12 @@ public class PlayerMovement : MonoBehaviour
             //allow animation to change to walking animation
             animationPlaying = false;
             movementAnimation = "walking";
+        }
+
+        //if player drops item
+        if(additionalWeight == false)
+        {
+            sprintSpeed = 1.5f;
         }
 
         //if player is on the ground and the velocity of the player is moving down
@@ -106,9 +112,9 @@ public class PlayerMovement : MonoBehaviour
         {
             //set audio clip speed
             if (!sprinting)
-                myAudioSource.pitch = 1.5f * additionalWeight;
+                myAudioSource.pitch = 1.5f;
             else
-                myAudioSource.pitch = 2.25f * additionalWeight;
+                myAudioSource.pitch = 2.25f;
             //if a sound is NOT already playing, play a random footstep sound
             if (!myAudioSource.isPlaying)
             {
@@ -120,8 +126,7 @@ public class PlayerMovement : MonoBehaviour
             //if the walking animation is NOT being played, start walking
             if(!animationPlaying)
             {
-                //set speed of animation according to how much weight i being carried
-                GetComponent<Animator>().speed = additionalWeight;
+                //play animation
                 myAnimator.Play(movementAnimation);
                 animationPlaying = true;
             }
@@ -148,7 +153,7 @@ public class PlayerMovement : MonoBehaviour
         //position to move to in the frame
         Vector3 move = transform.right * x + transform.forward * z;
         //gets character controller and moves player to new position according to speed
-        controller.Move(move * speed * sprintSpeed * airSpeed * additionalWeight *Time.deltaTime);
+        controller.Move(move * speed * sprintSpeed * airSpeed *Time.deltaTime);
         //if player jumps with space bar
         if (Input.GetButtonDown("Jump") && isGrounded)
         {

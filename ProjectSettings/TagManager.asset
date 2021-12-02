@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Fire
   - Artifact
+  - Ground
   layers:
   - Default
   - TransparentFX

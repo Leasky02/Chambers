@@ -185,12 +185,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65a153f01efc7644fa4c64efbe88e5c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnAttempts: 4
+  spawnAttempts: 3
   roomX1: -9
   roomX2: 5
   roomZ1: -1
   roomZ2: 21
-  doDestroy: 0
   ArtifactPrefabs:
   - {fileID: 5526751474925705491, guid: 6e3fb68605bdc4f4b851f729e0e63553, type: 3}
   - {fileID: 9041207568455947197, guid: 91b15917556ebac40b5adb3c3d49f4da, type: 3}

@@ -9,9 +9,6 @@ public class ArtifactData : MonoBehaviour
     //variable controlling the object scale;
     private float scale;
 
-    //variable containing weight speed multiplier for player
-    [HideInInspector] public float weightSpeedMultiplier;
-
     //variable containing artifact class
     //1 = low, 2 = medium, 3 = high
     private int artifactClass;
@@ -29,30 +26,24 @@ public class ArtifactData : MonoBehaviour
         {
             case 1:
                 //set the scale
-                scale = 1f;
-                transform.localScale = new Vector3(scale, scale, scale);
-                //set the value
-                value = 50;
-                //set the weight speed multiplier
-                weightSpeedMultiplier = 0.9f;
-                break;
-            case 2:
-                //set the scale
                 scale = 1.3f;
                 transform.localScale = new Vector3(scale, scale, scale);
                 //set the value
+                value = 50;
+                break;
+            case 2:
+                //set the scale
+                scale = 1.7f;
+                transform.localScale = new Vector3(scale, scale, scale);
+                //set the value
                 value = 80;
-                //set the weight speed multiplier
-                weightSpeedMultiplier = 0.75f;
                 break;
             case 3:
                 //set the scale
-                scale = 1.6f;
+                scale = 2.2f;
                 transform.localScale = new Vector3(scale, scale, scale);
                 //set the value
                 value = 120;
-                //set the weight speed multiplier
-                weightSpeedMultiplier = 0.6f;
                 break;
         }
         Debug.Log(artifactClass);
