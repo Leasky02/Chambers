@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float airSpeed = 1f;
     //sprint multiplier
     [SerializeField] private float sprintSpeed = 1f;
+    //artifact weight multiplier
+    [HideInInspector] public float additionalWeight = 1f;
     //contains if player is sprinting
     public bool sprinting = false;
     //if player is idle
@@ -32,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
 
     //contains the velocity of the player
-    Vector3 velocity;
+    public Vector3 velocity;
     //contains if the player is on the ground or not
     bool isGrounded;
     //audio source
@@ -100,13 +102,13 @@ public class PlayerMovement : MonoBehaviour
             airSpeed = 1f;
         }
         //if player is on the ground and is moving
-        if(isGrounded && (Input.GetAxis("Horizontal") + Input.GetAxis("Vertical") > 0) || Input.GetAxis("Horizontal") + Input.GetAxis("Vertical") < 0)
+        if(isGrounded && (Input.GetAxis("Horizontal") != 0) || Input.GetAxis("Vertical") != 0)
         {
             //set audio clip speed
             if (!sprinting)
-                myAudioSource.pitch = 1.5f;
+                myAudioSource.pitch = 1.5f * additionalWeight;
             else
-                myAudioSource.pitch = 2.25f;
+                myAudioSource.pitch = 2.25f * additionalWeight;
             //if a sound is NOT already playing, play a random footstep sound
             if (!myAudioSource.isPlaying)
             {
@@ -118,6 +120,8 @@ public class PlayerMovement : MonoBehaviour
             //if the walking animation is NOT being played, start walking
             if(!animationPlaying)
             {
+                //set speed of animation according to how much weight i being carried
+                GetComponent<Animator>().speed = additionalWeight;
                 myAnimator.Play(movementAnimation);
                 animationPlaying = true;
             }
@@ -144,7 +148,7 @@ public class PlayerMovement : MonoBehaviour
         //position to move to in the frame
         Vector3 move = transform.right * x + transform.forward * z;
         //gets character controller and moves player to new position according to speed
-        controller.Move(move * speed * sprintSpeed * airSpeed * Time.deltaTime);
+        controller.Move(move * speed * sprintSpeed * airSpeed * additionalWeight *Time.deltaTime);
         //if player jumps with space bar
         if (Input.GetButtonDown("Jump") && isGrounded)
         {

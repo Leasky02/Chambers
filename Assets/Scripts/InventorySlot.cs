@@ -74,9 +74,12 @@ public class InventorySlot : MonoBehaviour
     //pick up item
     void PickUp()
     {
-        Debug.Log("PICK UP");
         slotFull = true;
         equipped = true;
+
+        //set layer to "Weapon" (7)
+        //this will stop it clipping into walls
+        gameObject.layer = LayerMask.NameToLayer("Weapon");
 
         //make the artifact a child of the artifact container
         transform.SetParent(artifactContainer.transform);
@@ -92,6 +95,9 @@ public class InventorySlot : MonoBehaviour
 
         //disable gun script
         player.GetComponent<GunSelection>().enabled = false;
+
+        //set additional weight multiplier of player
+        player.GetComponent<PlayerMovement>().additionalWeight = gameObject.GetComponent<ArtifactData>().weightSpeedMultiplier;
 
         //if gun 0 is active in the hierarchy...
         if(guns[0].activeInHierarchy == true)
@@ -110,10 +116,12 @@ public class InventorySlot : MonoBehaviour
 
     void Drop()
     {
-        Debug.Log("DROP");
-
         slotFull = false;
         equipped = false;
+
+        //set layer to "Default" (0)
+        //this will stop it clipping into walls
+        gameObject.layer = LayerMask.NameToLayer("Default");
 
         //set parent to null
         transform.SetParent(null);
@@ -123,7 +131,7 @@ public class InventorySlot : MonoBehaviour
         coll.isTrigger = false;
 
         //object carries momentum of the player
-        rb.velocity = player.GetComponent<Rigidbody>().velocity;
+        rb.velocity = player.GetComponent<PlayerMovement>().velocity;
 
         //add force to object to throw away
         rb.AddForce(fpsCam.forward * dropForwardForce, ForceMode.Impulse);
@@ -131,6 +139,10 @@ public class InventorySlot : MonoBehaviour
 
         //disable gun script
         player.GetComponent<GunSelection>().enabled = true;
+
+        //set additional weight multiplier of player
+        player.GetComponent<PlayerMovement>().additionalWeight = 1f;
+
         //enable gun object
         if (activeGun == 0)
         {

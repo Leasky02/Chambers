@@ -14,8 +14,6 @@ public class ArtifactSpawnManager : MonoBehaviour
     [SerializeField] private float roomZ1;
     [SerializeField] private float roomZ2;
 
-    public bool doDestroy = false;
-
     //variable holding all artifact prefabs
     [SerializeField] private GameObject[] ArtifactPrefabs;
 
@@ -63,11 +61,8 @@ public class ArtifactSpawnManager : MonoBehaviour
                 rotatedRandomPosition.z += transform.position.z;
 
                 //Instantiate Artifact within Random Locations
-                if(!doDestroy)
-                {
-                    //create random object
-                    GameObject tempArtifact = Instantiate(ArtifactPrefabs[Random.Range(0, 8)], rotatedRandomPosition, Quaternion.identity);
-                }
+                //create random object
+                GameObject tempArtifact = Instantiate(ArtifactPrefabs[Random.Range(0, 5)], rotatedRandomPosition, Quaternion.identity);
             }
         }
     }

@@ -107,10 +107,6 @@ MonoBehaviour:
   roomZ2: 21
   doDestroy: 0
   ArtifactPrefabs:
-  - {fileID: 4738478126641464918, guid: 398a51736b8e4c14080f428843062906, type: 3}
-  - {fileID: 4905190641976156884, guid: 149cc8a961448824e9f04c088a18a6ca, type: 3}
-  - {fileID: 3912203739930516682, guid: fbd7f4b18a5bbca408ca53517997f037, type: 3}
-  - {fileID: 483370239750793921, guid: 4906eb92ce56c7e4c95c5b993d1d1698, type: 3}
   - {fileID: 5526751474925705491, guid: 6e3fb68605bdc4f4b851f729e0e63553, type: 3}
   - {fileID: 9041207568455947197, guid: 91b15917556ebac40b5adb3c3d49f4da, type: 3}
   - {fileID: 638574308516756730, guid: cfc6a13758e2fe443926acf5a3763a8d, type: 3}
