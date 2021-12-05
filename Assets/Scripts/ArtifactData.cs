@@ -46,6 +46,6 @@ public class ArtifactData : MonoBehaviour
                 value = 120;
                 break;
         }
-        Debug.Log(artifactClass);
+        //Debug.Log(artifactClass);
     }
 }

@@ -41,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
     private AudioSource myAudioSource;
     //audio clip
     [SerializeField] private AudioClip[] walkingSound;
+    //bool holding if player is already on the sand
+    private bool onSand = false;
 
     //animator
     private Animator myAnimator;
@@ -61,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //setting bool to see if player is on the ground repeatedly
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        Debug.Log(additionalWeight);
+        //Debug.Log(additionalWeight);
         //test if player presses button to sprint and is on the ground
         if (Input.GetButton("Sprint") && isGrounded && additionalWeight == false)
         {
@@ -114,12 +116,30 @@ public class PlayerMovement : MonoBehaviour
             if (!sprinting)
                 myAudioSource.pitch = 1.5f;
             else
-                myAudioSource.pitch = 2.25f;
+                myAudioSource.pitch = 2f;
+            //if player is above the chambers on the sand
+            if(transform.position.y > 11.5f && !onSand)
+            {
+                //stop current walking sound
+                myAudioSource.Pause();
+            }
             //if a sound is NOT already playing, play a random footstep sound
             if (!myAudioSource.isPlaying)
             {
-                //set audio clip randomly
-                myAudioSource.clip = walkingSound[Random.Range(0, 2)];
+                //if player is on sand (above the chambers)
+                if(transform.position.y > 11.5f)
+                {
+                    onSand = true;
+                    //set audio clip randomly for sand sounds
+                    myAudioSource.clip = walkingSound[Random.Range(3, 6)];
+                }
+                //if player isnt on sand
+                else
+                {
+                    onSand = false;
+                    //set audio clip randomly for stone sounds
+                    myAudioSource.clip = walkingSound[Random.Range(0, 3)];
+                }
                 //play walking sound
                 myAudioSource.Play();
             }

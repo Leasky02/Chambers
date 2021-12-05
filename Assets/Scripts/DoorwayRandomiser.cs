@@ -17,14 +17,14 @@ public class DoorwayRandomiser : MonoBehaviour
     private Animator myAnimator;
     //variable string holding number of door
     [SerializeField] private string doorNumber;
-
+    /*
     //TEMP testing variable to summon an object to visualise what doors can potentially close
     [SerializeField] private GameObject visualIdentifierPrefab;
     //TEMP variable to contain the instantiated identifier
     private GameObject visualIdentifierObject;
     //TEMP variable to contain materials for object visualisation
     [SerializeField] private Material[] visualMaterial;
-
+    */
     private void Awake()
     {
         //set animator variable to the component
@@ -35,13 +35,14 @@ public class DoorwayRandomiser : MonoBehaviour
     {
         if (attemptClose)
         {
+            /*
             //TEMP Create position from object position
             Vector3 position = GetComponent<Transform>().position;
             //TEMP set y position up higher above the level
             position.y = position.y + 20;
             //TEMP create object with position above
             visualIdentifierObject = Instantiate(visualIdentifierPrefab, position, Quaternion.identity);
-
+            */
             //do the wall change function in 1 seconds
             Invoke("ChangeWall", 1f);
         }
@@ -81,10 +82,10 @@ public class DoorwayRandomiser : MonoBehaviour
                     //play audio
                     GetComponent<AudioSource>().Play();
                 }
-
+                /*
                 //TEMP set material to red material (has been blocked off)
                 visualIdentifierObject.GetComponent<MeshRenderer>().material = visualMaterial[1];
-
+                */
                 //set open state to false
                 openState = false;
             }
@@ -99,10 +100,10 @@ public class DoorwayRandomiser : MonoBehaviour
                     //play audio
                     GetComponent<AudioSource>().Play();
                 }
-
+                /*
                 //TEMP set material to green material (has NOT been blocked off)
                 visualIdentifierObject.GetComponent<MeshRenderer>().material = visualMaterial[0];
-
+                */
                 //set open state to true
                 openState = true;
             }
