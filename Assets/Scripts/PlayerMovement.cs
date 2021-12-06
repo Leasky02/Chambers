@@ -123,6 +123,12 @@ public class PlayerMovement : MonoBehaviour
                 //stop current walking sound
                 myAudioSource.Pause();
             }
+
+            //if player isn't on the ground
+            if(!isGrounded)
+            {
+                myAudioSource.Pause();
+            }
             //if a sound is NOT already playing, play a random footstep sound
             if (!myAudioSource.isPlaying)
             {
@@ -140,8 +146,12 @@ public class PlayerMovement : MonoBehaviour
                     //set audio clip randomly for stone sounds
                     myAudioSource.clip = walkingSound[Random.Range(0, 3)];
                 }
-                //play walking sound
-                myAudioSource.Play();
+                //if player is on the ground, play the sound
+                if(isGrounded)
+                {
+                    //play walking sound
+                    myAudioSource.Play();
+                }
             }
             //if the walking animation is NOT being played, start walking
             if(!animationPlaying)
