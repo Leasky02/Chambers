@@ -8,6 +8,7 @@ TagManager:
   - Artifact
   - Ground
   - sand
+  - ammo
   layers:
   - Default
   - TransparentFX

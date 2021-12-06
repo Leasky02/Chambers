@@ -61,8 +61,7 @@ public class ArtifactSpawnManager : MonoBehaviour
                 rotatedRandomPosition.z += transform.position.z;
 
                 //Instantiate Artifact within Random Locations
-                //create random object
-                GameObject tempArtifact = Instantiate(ArtifactPrefabs[Random.Range(0, 5)], rotatedRandomPosition, Quaternion.identity);
+                Instantiate(ArtifactPrefabs[Random.Range(0, 5)], rotatedRandomPosition, Quaternion.identity);
             }
         }
     }

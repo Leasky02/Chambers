@@ -38,7 +38,7 @@ public class Gun : MonoBehaviour
     //variable for thr animator
     private Animator myAnimator;
     //total ammo you can reload with
-    [SerializeField] private int totalAmmo;
+    public int totalAmmo;
     public bool reloading = false;
     //text box to show ammo count
     [SerializeField] private Text loadedAmmoDisplay;

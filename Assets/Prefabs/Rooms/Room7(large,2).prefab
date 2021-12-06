@@ -70,6 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8210172918766583171}
   - component: {fileID: 5885319200786215803}
+  - component: {fileID: 2422381812149413115}
   m_Layer: 0
   m_Name: Room7(large,2)
   m_TagString: Untagged
@@ -118,6 +119,26 @@ MonoBehaviour:
   - {fileID: 638574308516756730, guid: cfc6a13758e2fe443926acf5a3763a8d, type: 3}
   - {fileID: 8451510731685207159, guid: cb2a21f02429681469cbd0335f99334f, type: 3}
   - {fileID: 2948358927151717631, guid: 3e6460a7bb3b3c9488a38b8d66d4c1d1, type: 3}
+--- !u!114 &2422381812149413115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8210172918766583196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fbb250e7289a2f4da889d5ffae9bf96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnAttempts: 2
+  roomX1: -9
+  roomX2: 5
+  roomZ1: -1
+  roomZ2: 13
+  AmmoPrefabs:
+  - {fileID: 569742585518866421, guid: eb01d4adfbe544b448f0325c1ba27f6f, type: 3}
+  - {fileID: 7829323644090820272, guid: 5e34c929466c59343aaa42eb312e93d4, type: 3}
 --- !u!1 &8210172918949145983
 GameObject:
   m_ObjectHideFlags: 0
