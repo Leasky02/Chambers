@@ -57,12 +57,12 @@ public class InventorySlot : MonoBehaviour
         Vector3 distanceToPlayer = player.GetComponent<Transform>().position - transform.position;
         //if player is putting pickup input & doesn't already have an item & The artifact is within range
         // and if this object is already equipped
-        if (Input.GetKeyDown(KeyCode.E) && !slotFull && distanceToPlayer.magnitude < pickupRange && !equipped)
+        if (Input.GetButtonDown("PickUp") && !slotFull && distanceToPlayer.magnitude < pickupRange && !equipped)
         {
             //do pickup function
             PickUp();
         }
-        else if (Input.GetKeyDown(KeyCode.E) && slotFull && equipped)
+        else if (Input.GetButtonDown("PickUp") && slotFull && equipped)
         {
             //do drop function
             Drop();

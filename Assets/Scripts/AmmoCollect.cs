@@ -17,7 +17,6 @@ public class AmmoCollect : MonoBehaviour
         //if the object collided with is tagged with "ammo"
         if (other.gameObject.CompareTag("ammo"))
         {
-            Debug.Log("collisionx2");
             //then if the ammo type is for rifle
             if (other.gameObject.GetComponent<AmmoDataManager>().ammoType == "Rifle")
             {

@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButton("Sprint") && isGrounded && additionalWeight == false)
         {
             //set sprint speed
-            sprintSpeed = 1.5f;
+            sprintSpeed = 1.35f;
             //set FOV up for sprinting
             sprinting = true;
             //allow animation to change to sprinting animation
@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
             movementAnimation = "sprinting";
         }
         //if player has stopped moving, or picked up an item stop sprinting
-        if ((idle == true && sprinting) || additionalWeight == true)
+        if ((idle == true && sprinting))
         {
             //set sprint speed to normal
             sprintSpeed = 1f;
@@ -88,9 +88,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //if player drops item
-        if(additionalWeight == false)
+        if (additionalWeight == false)
         {
-            sprintSpeed = 1.5f;
+            sprintSpeed = 1.35f;
         }
 
         //if player is on the ground and the velocity of the player is moving down
@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //if not on ground and sprinting, slow player movement by air speed
-        if(!isGrounded && !sprinting)
+        if (!isGrounded && !sprinting)
         {
             airSpeed = 0.6f;
         }
@@ -110,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
             airSpeed = 1f;
         }
         //if player is on the ground and is moving
-        if(isGrounded && (Input.GetAxis("Horizontal") != 0) || Input.GetAxis("Vertical") != 0)
+        if (isGrounded && (Input.GetAxis("Horizontal") != 0) || Input.GetAxis("Vertical") != 0)
         {
             //set audio clip speed
             if (!sprinting)
@@ -118,14 +118,14 @@ public class PlayerMovement : MonoBehaviour
             else
                 myAudioSource.pitch = 2f;
             //if player is above the chambers on the sand
-            if(transform.position.y > 11.5f && !onSand)
+            if (transform.position.y > 11.5f && !onSand)
             {
                 //stop current walking sound
                 myAudioSource.Pause();
             }
 
             //if player isn't on the ground
-            if(!isGrounded)
+            if (!isGrounded)
             {
                 myAudioSource.Pause();
             }
@@ -133,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
             if (!myAudioSource.isPlaying)
             {
                 //if player is on sand (above the chambers)
-                if(transform.position.y > 11.5f)
+                if (transform.position.y > 11.5f)
                 {
                     onSand = true;
                     //set audio clip randomly for sand sounds
@@ -147,14 +147,14 @@ public class PlayerMovement : MonoBehaviour
                     myAudioSource.clip = walkingSound[Random.Range(0, 3)];
                 }
                 //if player is on the ground, play the sound
-                if(isGrounded)
+                if (isGrounded)
                 {
                     //play walking sound
                     myAudioSource.Play();
                 }
             }
             //if the walking animation is NOT being played, start walking
-            if(!animationPlaying)
+            if (!animationPlaying)
             {
                 //play animation
                 myAnimator.Play(movementAnimation);
@@ -165,13 +165,16 @@ public class PlayerMovement : MonoBehaviour
         {
             //stop footsteps
             myAudioSource.Stop();
+            //stop animation of walking
+            myAnimator.StopPlayback();
+
         }
         //set x and z equal to Axis input
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
         //if player isnt moving
-        if(Input.GetAxis("Horizontal") < 0.4 && Input.GetAxis("Vertical") < 0.4)
+        if (Input.GetAxis("Horizontal") < 0.4 && Input.GetAxis("Vertical") < 0.4)
         {
             idle = true;
         }
@@ -183,7 +186,7 @@ public class PlayerMovement : MonoBehaviour
         //position to move to in the frame
         Vector3 move = transform.right * x + transform.forward * z;
         //gets character controller and moves player to new position according to speed
-        controller.Move(move * speed * sprintSpeed * airSpeed *Time.deltaTime);
+        controller.Move(move * speed * sprintSpeed * airSpeed * Time.deltaTime);
         //if player jumps with space bar
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -200,7 +203,7 @@ public class PlayerMovement : MonoBehaviour
     public void CheckToContinueAnimation()
     {
         //if player is not on ground or not moving
-        if(!isGrounded || Input.GetAxis("Horizontal") + Input.GetAxis("Vertical") == 0)
+        if (!isGrounded || Input.GetAxis("Horizontal") + Input.GetAxis("Vertical") == 0)
         {
             //sest player to static
             myAnimator.Play("static");
