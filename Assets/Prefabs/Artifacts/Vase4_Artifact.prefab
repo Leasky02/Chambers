@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2301166122753575958}
-  - component: {fileID: 172761407702365910}
   - component: {fileID: 1319888553783629591}
   - component: {fileID: 2148414759895997033}
   - component: {fileID: 747976492455198803}
@@ -17,6 +16,7 @@ GameObject:
   - component: {fileID: 7381399197970450501}
   - component: {fileID: 6662976317179281251}
   - component: {fileID: -1396877913467023097}
+  - component: {fileID: 840789110221859540}
   m_Layer: 6
   m_Name: Vase4_Artifact
   m_TagString: Artifact
@@ -39,22 +39,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &172761407702365910
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8451510731685207159}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 2
 --- !u!1818360608 &1319888553783629591
 PositionConstraint:
   m_ObjectHideFlags: 0
@@ -101,7 +85,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   check: 0
   pickupRange: 3
-  dropForwardForce: 7
+  dropForwardForce: 10
   dropUpwardForce: 10
   fpsCam: {fileID: 0}
   player: {fileID: 0}
@@ -5062,6 +5046,22 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!54 &840789110221859540
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8451510731685207159}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!64 &6634687397943559208
 MeshCollider:
   m_ObjectHideFlags: 0

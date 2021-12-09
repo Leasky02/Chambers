@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class InventorySlot : MonoBehaviour
     //variable holding the artifact container
     [SerializeField] private GameObject artifactContainer;
 
+    //variable holding the artifactValueDisplay
+    private GameObject artifactValueDisplay;
+
     //artifact transform variable
     private Transform artifactPosition;
 
@@ -42,6 +46,7 @@ public class InventorySlot : MonoBehaviour
         guns[0] = GameObject.Find("Handgun_01");
         guns[1] = GameObject.Find("Assault_Rifle_01");
         artifactContainer = GameObject.Find("Artifact Container");
+        artifactValueDisplay = GameObject.Find("ValueDisplay");
         
 
 
@@ -95,6 +100,11 @@ public class InventorySlot : MonoBehaviour
             //set additional weight multiplier of player
             player.GetComponent<PlayerMovement>().additionalWeight = true;
 
+            //display the value to Player
+            artifactValueDisplay.GetComponent<Text>().text = ("Value: £" + gameObject.GetComponent<ArtifactData>().value);
+            //set text to green
+            artifactValueDisplay.GetComponent<Text>().color = new Color(0.113f, 0.603f, 0.164f);
+
             //if gun 0 is active in the hierarchy...
             if (guns[0].activeInHierarchy == true)
             {
@@ -140,6 +150,11 @@ public class InventorySlot : MonoBehaviour
 
             //set additional weight multiplier of player
             player.GetComponent<PlayerMovement>().additionalWeight = false;
+
+            //display the value to Player
+            artifactValueDisplay.GetComponent<Text>().text = ("Value: £0");
+            //set text to white
+            artifactValueDisplay.GetComponent<Text>().color = new Color(1f, 1f, 1f);
 
             //enable gun object
             if (activeGun == 0)

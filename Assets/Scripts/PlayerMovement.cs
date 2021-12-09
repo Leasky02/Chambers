@@ -65,10 +65,10 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         //Debug.Log(additionalWeight);
         //test if player presses button to sprint and is on the ground
-        if (Input.GetButton("Sprint") && isGrounded && additionalWeight == false)
+        if (Input.GetButton("Sprint") && isGrounded)
         {
             //set sprint speed
-            sprintSpeed = 1.35f;
+            sprintSpeed = 1.6f;
             //set FOV up for sprinting
             sprinting = true;
             //allow animation to change to sprinting animation
@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
         //if player drops item
         if (additionalWeight == false)
         {
-            sprintSpeed = 1.35f;
+            sprintSpeed = 1.6f;
         }
 
         //if player is on the ground and the velocity of the player is moving down

@@ -62,12 +62,12 @@ public class Gun : MonoBehaviour
     void Update()
     {
         //if left mouse click, then shoot (pistol)
-        if(isPistol)
+        if (isPistol)
         {
             if (Input.GetAxisRaw("Shoot") == 1 && Time.time >= nextTimeToFire)
             {
                 //if gun hasnt already been shot when trigger is first pressed
-                if(canShoot)
+                if (canShoot)
                 {
                     //sets next time to fire to current time + 1 second divided by fire rate (shots per second)
                     nextTimeToFire = Time.time + 1f / fireRate;
@@ -107,16 +107,17 @@ public class Gun : MonoBehaviour
         if (Input.GetButtonDown("Reload"))
         {
             //if there is ammo to reload with, reload
-            if(totalAmmo > 0 && !reloading && loadedAmmo < maxAmmo)
+            if (totalAmmo > 0 && !reloading && loadedAmmo < maxAmmo)
                 Reload();
         }
 
         //if aim button is pressed
         if (Input.GetAxisRaw("Aim") == 1 || Input.GetButtonDown("Aim"))
         {
-            if(!aimPressed && !reloading)
+            if (!aimPressed && !reloading)
             {
                 //allows camera to zoom in to 40 FOV
+                ZoomIn();
                 isZoomed = true;
 
                 //allows camera to zoom out
@@ -137,9 +138,10 @@ public class Gun : MonoBehaviour
         //if aim button is released
         if (Input.GetAxisRaw("Aim") == 0 || Input.GetButtonUp("Aim"))
         {
-            if(!aimReleased && !reloading)
+            if (!aimReleased && !reloading)
             {
                 //sets camera to zoom out to 60 FOV
+                ZoomOut();
                 isZoomed = false;
 
                 //zoom camera out
@@ -156,49 +158,9 @@ public class Gun : MonoBehaviour
                 aimReleased = true;
             }
         }
-        //if camera should be zoomed in
-        if(isZoomed)
-        {
-            //then if the player is sprinting
-            if (player.GetComponent<PlayerMovement>().sprinting)
-            {
-                //Zoom to FOV + 20
-                fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, FOV + 20, Time.deltaTime * 7f);
-            }
-            else
-            {
-                //if so, zoom to FOV
-                fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, FOV, Time.deltaTime * 7);
-            }
-
-            //slow down player speed
-            player.GetComponent<PlayerMovement>().speed = 3.5f;
-            //lower mouse sensetivity
-            fpsCam.GetComponent<MoveLook>().mouseSensetivity = 120f;
-        }
-        //if camera should be zoomed out
-        if(!isZoomed)
-        {
-            //then if player is sprinting
-            if(player.GetComponent<PlayerMovement>().sprinting)
-            {
-                //zoom to normal + 20
-                fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, 80, Time.deltaTime * 7);
-            }
-            else
-            {
-                //if not, zoom to normal
-                fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, 60, Time.deltaTime * 7);
-            }
-
-            //speed up player speed
-            player.GetComponent<PlayerMovement>().speed = 7f;
-            //increase mouse sensetivity
-            fpsCam.GetComponent<MoveLook>().mouseSensetivity = 250f;
-        }
 
         //if no ammo, reload automatically
-        if(loadedAmmo == 0 && totalAmmo > 0 && reloading == false)
+        if (loadedAmmo == 0 && totalAmmo > 0 && reloading == false)
         {
             Invoke("Reload", 0.3f);
         }
@@ -206,6 +168,19 @@ public class Gun : MonoBehaviour
         //update ammo count
         totalAmmoDisplay.text = ("" + totalAmmo);
         loadedAmmoDisplay.text = ("" + loadedAmmo);
+
+    }
+    
+    public void ZoomIn()
+    {
+        //tells FOV controller to zoom in
+        player.GetComponent<FOVController>().isZoomed = true;
+    }
+
+    public void ZoomOut()
+    {
+        //tells FOV controller to zoom out
+        player.GetComponent<FOVController>().isZoomed = false;
     }
 
     void Shoot()
