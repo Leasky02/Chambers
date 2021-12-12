@@ -12,14 +12,16 @@ public class Timer : MonoBehaviour
     //variable that contains timer text;
     [SerializeField] private Text displayText;
     private bool takingAway = false;
-    [HideInInspector] public bool runTimer = false;
+    private bool runTimer = false;
+
+    //event controller
+    [SerializeField] private GameObject eventManager;
 
     //start called on the first frame
     private void Start()
     {
         //display text
         displayText.text = minutes + ":00";
-        Debug.Log(runTimer);
     }
     // Update is called once per frame
     void Update()
@@ -28,6 +30,11 @@ public class Timer : MonoBehaviour
         {
             StartCoroutine(TakeTime());
         }
+    }
+
+    public void RunTimer()
+    {
+        runTimer = true;
     }
 
     IEnumerator TakeTime()
@@ -58,8 +65,16 @@ public class Timer : MonoBehaviour
         if(minutes == 0 && seconds == 0)
         {
             runTimer = false;
+            //delay to test for win/lose
+            Invoke("EndGame", 0.5f);
         }
         //set variable to say it has FINISHED changing the time
         takingAway = false;
+    }
+
+    public void EndGame()
+    {
+        //end the game
+        eventManager.GetComponent<EventController>().EndGameCheck();
     }
 }

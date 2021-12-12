@@ -14,6 +14,7 @@ public class DropZone : MonoBehaviour
         //if object is an artifact
         if(collision.collider.CompareTag("Artifact"))
         {
+            Debug.Log("Deposit");
             //add the score of the artifact to the score object
             score.GetComponent<Score>().AddScore(collision.gameObject.GetComponent<ArtifactData>().value);
             RemoveArtifact(collision.gameObject);
