@@ -62,7 +62,7 @@ PositionConstraint:
   m_GameObject: {fileID: 9041207568455947197}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: -11.233814, y: 2.4589896, z: -3.2273254}
+  m_TranslationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffset: {x: 0, y: 0, z: 0}
   m_AffectTranslationX: 0
   m_AffectTranslationY: 1

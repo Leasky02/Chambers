@@ -25,14 +25,20 @@ public class ArtifactData : MonoBehaviour
             case 1:
                 //set the value
                 value = 50;
+                //set value randomly
+                value = Random.Range(value - 10, value + 10);
                 break;
             case 2:
                 //set the value
                 value = 80;
+                //set value randomly
+                value = Random.Range(value - 10, value + 10);
                 break;
             case 3:
                 //set the value
                 value = 120;
+                //set value randomly
+                value = Random.Range(value - 10, value + 10);
                 break;
         }
         //Debug.Log(artifactClass);

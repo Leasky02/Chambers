@@ -142,8 +142,8 @@ public class InventorySlot : MonoBehaviour
             rb.velocity = player.GetComponent<PlayerMovement>().velocity;
 
             //add force to object to throw away
-            rb.AddForce(fpsCam.forward * dropForwardForce, ForceMode.Impulse);
-            rb.AddForce(fpsCam.up * dropUpwardForce, ForceMode.Impulse);
+            rb.AddForce(player.transform.forward * dropForwardForce, ForceMode.Impulse);
+            rb.AddForce(player.transform.up * dropUpwardForce, ForceMode.Impulse);
 
             //disable gun script
             player.GetComponent<GunSelection>().enabled = true;
