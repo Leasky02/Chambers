@@ -121,7 +121,7 @@ public class EventController : MonoBehaviour
         //set the win screen to visible
         winScreenCanvas.SetActive(true);
         //set score display
-        scoreDisplay.text = ("Score: £" + scoreManager.GetComponent<Score>().score);
+        scoreDisplay.text = ("£" + scoreManager.GetComponent<Score>().score);
     }
 
     public void LoseGame()

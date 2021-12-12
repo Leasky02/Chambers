@@ -8,11 +8,26 @@ public class SceneController : MonoBehaviour
 
     //transitionObject
     [SerializeField] private GameObject sceneTransitions;
+    //source of wind (main menu only)
+    [SerializeField] private GameObject wind;
+
+    private void Start()
+    {
+        //call function to set transition layer to 0
+        Invoke("SetLayer", 1.2f);
+    }
 
     public void ChangeScene(string sceneToLoad)
     {
         StartCoroutine(LoadScene(sceneToLoad));
     }
+    //used to put transition UI elemnt to back
+    public void SetLayer()
+    {
+        //set sorting order to 0
+        sceneTransitions.GetComponent<Canvas>().sortingOrder = 0;
+    }
+
     IEnumerator LoadScene(string sceneToLoad)
     {
         //start exit transition
