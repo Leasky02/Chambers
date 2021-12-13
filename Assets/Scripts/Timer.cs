@@ -11,7 +11,7 @@ public class Timer : MonoBehaviour
 
     //variable that contains timer text;
     [SerializeField] private Text displayText;
-    private bool takingAway = false;
+    [HideInInspector] public bool takingAway = false;
     private bool runTimer = false;
 
     //event controller
@@ -28,7 +28,10 @@ public class Timer : MonoBehaviour
     {
         if(!takingAway && runTimer)
         {
-            StartCoroutine(TakeTime());
+            //set variable to say it is currently in the process of changing the time
+            takingAway = true;
+            //wait for 1 second
+            Invoke("TakeTime",1f);
         }
     }
 
@@ -37,12 +40,8 @@ public class Timer : MonoBehaviour
         runTimer = true;
     }
 
-    IEnumerator TakeTime()
+    public void TakeTime()
     {
-        //set variable to say it is currently in the process of changing the time
-        takingAway = true;
-        //wait for 1 second
-        yield return new WaitForSeconds(1f);
         //remove 1 second
         seconds--;
         //if seconds is less than 0 AND there is more than 1 minute left, set it to 59

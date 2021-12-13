@@ -8,13 +8,14 @@ public class DropZone : MonoBehaviour
     [SerializeField] private GameObject score;
     //variable holding the cash sound
     [SerializeField] private AudioClip cashSound;
+
     //when object collides
     private void OnCollisionEnter(Collision collision)
     {
         //if object is an artifact
         if(collision.collider.CompareTag("Artifact"))
         {
-            Debug.Log("Deposit");
+            Debug.Log(collision.gameObject + "This should only be shown once");
             //add the score of the artifact to the score object
             score.GetComponent<Score>().AddScore(collision.gameObject.GetComponent<ArtifactData>().value);
             RemoveArtifact(collision.gameObject);

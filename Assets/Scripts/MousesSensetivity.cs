@@ -10,7 +10,7 @@ public class MousesSensetivity : MonoBehaviour
         //set value to 100 by default when first played
         if(MoveLook.mouseSensetivity == 0)
         {
-            MoveLook.mouseSensetivity = 100;
+            MoveLook.mouseSensetivity = 150;
         }
         //set slider to alue of mouse sensetivity
         GetComponent<Slider>().value = MoveLook.mouseSensetivity;

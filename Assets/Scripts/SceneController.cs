@@ -8,8 +8,6 @@ public class SceneController : MonoBehaviour
 
     //transitionObject
     [SerializeField] private GameObject sceneTransitions;
-    //source of wind (main menu only)
-    [SerializeField] private GameObject wind;
 
     private void Start()
     {
@@ -30,6 +28,8 @@ public class SceneController : MonoBehaviour
 
     IEnumerator LoadScene(string sceneToLoad)
     {
+        //set time to normal speed
+        Time.timeScale = 1f;
         //start exit transition
         sceneTransitions.GetComponent<Animator>().Play("Exit");
         sceneTransitions.GetComponent<Canvas>().sortingOrder = 2000;

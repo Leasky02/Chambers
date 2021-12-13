@@ -31,7 +31,8 @@ public class EventController : MonoBehaviour
     [SerializeField] private GameObject mainCamera;
 
     //variable to say if game has started
-    private bool gameStarted = false;
+    public static bool gameStarted = false;
+    public static bool musicStarted = false;
 
     //contains if player is in or out of the chambers
     private bool isOutside;
@@ -77,6 +78,7 @@ public class EventController : MonoBehaviour
     {
         //play music
         musicPlayer.Play();
+        musicStarted = true;
     }
 
     public void StartAnimation()
