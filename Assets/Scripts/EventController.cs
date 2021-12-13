@@ -56,7 +56,7 @@ public class EventController : MonoBehaviour
                 gameStarted = true;
             }
         }
-        Debug.Log(isOutside);
+        //Debug.Log(isOutside);
     }
 
     public void StartGame()

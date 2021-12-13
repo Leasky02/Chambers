@@ -10,6 +10,8 @@ public class FOVController : MonoBehaviour
     //defines if camera should zoom out
     public bool isZoomed = false;
 
+    private bool isSlowSensetivity = true;
+
     [SerializeField] private float FOV = 40f;
 
     // Update is called once per frame
@@ -33,7 +35,13 @@ public class FOVController : MonoBehaviour
             //slow down player speed
             gameObject.GetComponent<PlayerMovement>().speed = 3.5f;
             //lower mouse sensetivity
-            fpsCam.GetComponent<MoveLook>().mouseSensetivity = 120f;
+            if(!isSlowSensetivity)
+            {
+                //decrease mouse sensetivity
+                fpsCam.GetComponent<MoveLook>().ZoomIn();
+                //allows it to speed up sensetivity
+                isSlowSensetivity = true;
+            }
         }
         //if camera should be zoomed out
         if (!isZoomed)
@@ -52,8 +60,13 @@ public class FOVController : MonoBehaviour
 
             //speed up player speed
             gameObject.GetComponent<PlayerMovement>().speed = 7f;
-            //increase mouse sensetivity
-            fpsCam.GetComponent<MoveLook>().mouseSensetivity = 250f;
+            if(isSlowSensetivity)
+            {
+                //increase mouse sensetivity
+                fpsCam.GetComponent<MoveLook>().ZoomOut();
+                //allows it to slow down sensetivity
+                isSlowSensetivity = false;
+            }
         }
     }
 }
