@@ -8,6 +8,7 @@ public class EventController : MonoBehaviour
     //variables containing UI element canvases
     [SerializeField] private GameObject artifactCanvas;
     [SerializeField] private GameObject timerCanvas;
+    [SerializeField] private GameObject scoreCanvas;
     [SerializeField] private GameObject pistol;
     [SerializeField] private GameObject rifle;
 
@@ -24,11 +25,15 @@ public class EventController : MonoBehaviour
     [SerializeField] private Animator doorAnimator;
     //score manager
     [SerializeField] private Text scoreDisplay;
+    [SerializeField] private Text overallScoreDisplay;
     [SerializeField] private GameObject scoreManager;
 
     //player
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject mainCamera;
+
+    //animator for scores
+    [SerializeField] private Animator scoreAnimations;
 
     //variable to say if game has started
     public static bool gameStarted = false;
@@ -36,6 +41,16 @@ public class EventController : MonoBehaviour
 
     //contains if player is in or out of the chambers
     private bool isOutside;
+
+    //variable to tell script to add current score to overall score
+    private bool switchScore;
+
+    //temporary variables containing score
+    private float tempScore;
+    private float tempOverallScore;
+
+    //variable to hold money sound
+    [SerializeField] private AudioClip moneyComplete;
 
     private void Update()
     {
@@ -57,7 +72,43 @@ public class EventController : MonoBehaviour
                 gameStarted = true;
             }
         }
-        //Debug.Log(isOutside);
+        //take one off score and add one to overall score
+        if(switchScore)
+        {
+            if(tempScore > 0)
+            {
+                if(tempScore>5)
+                {
+                    //take two away from score for faster countup
+                    tempScore -= 2;
+                    //add two to overall score
+                    tempOverallScore+=2;
+                }
+                else
+                {
+                    //add what is left of score 
+                    tempOverallScore+=tempScore;
+                    //set score to 0
+                    tempScore = 0;
+                }
+                //display score
+                scoreDisplay.text = ("£" + tempScore);
+                //display overall score
+                overallScoreDisplay.text = ("£" + tempOverallScore);
+            }
+            else
+            {
+                //start animator
+                scoreAnimations.Play("Switch");
+                //stop sound
+                //play sound of score adding up
+                GetComponent<AudioSource>().Stop();
+                GetComponent<AudioSource>().clip = moneyComplete;
+                GetComponent<AudioSource>().loop = false;
+                GetComponent<AudioSource>().Play();
+                switchScore = false;
+            }
+        }
     }
 
     public void StartGame()
@@ -104,6 +155,7 @@ public class EventController : MonoBehaviour
         //disable other UI components
         artifactCanvas.SetActive(false);
         timerCanvas.SetActive(false);
+        scoreCanvas.SetActive(false);
 
         //disable player movement
         player.GetComponent<PlayerMovement>().enabled = false;
@@ -124,11 +176,31 @@ public class EventController : MonoBehaviour
         winScreenCanvas.SetActive(true);
         //set score display
         scoreDisplay.text = ("£" + scoreManager.GetComponent<Score>().score);
+        //set overallScore display
+        overallScoreDisplay.text = ("£" + scoreManager.GetComponent<Score>().overallScore);
+
+        //adds score to long term score
+        scoreManager.GetComponent<Score>().SaveScore();
+        //triggers score adding onto the main score counting down
+        Invoke("StartTally", 0.7f);
     }
 
     public void LoseGame()
     {
         //set the lose screen to visible
         loseScreenCanvas.SetActive(true);
+    }
+
+    private void StartTally()
+    {
+        //set tempOverallScore to overallScore
+        tempScore = scoreManager.GetComponent<Score>().score;
+        //set tempScore to score
+        tempOverallScore = scoreManager.GetComponent<Score>().overallScore;
+
+        //allows script to tally up score by switching score to overall score
+        switchScore = true;
+        //play sound of score adding up
+        GetComponent<AudioSource>().Play();
     }
 }

@@ -38,6 +38,11 @@ public class InventorySlot : MonoBehaviour
     //collider of gameObject
     private Collider coll;
 
+    //colours
+    private Color blue = new Color(123f / 255f, 157f / 255f, 230f / 255f, 1f);
+    private Color orange = new Color(230f / 255f, 107f / 255f, 21f / 255f, 1f);
+    private Color purple = new Color(230f / 255f, 64f / 255f, 227f / 255f, 1f);
+
     private void Awake()
     {
         //assign all objects to variables
@@ -102,11 +107,26 @@ public class InventorySlot : MonoBehaviour
 
             //display the value to Player
             artifactValueDisplay.GetComponent<Text>().text = ("Value: £" + gameObject.GetComponent<ArtifactData>().value);
-            //set text to green
-            artifactValueDisplay.GetComponent<Text>().color = new Color(0.113f, 0.603f, 0.164f);
+            
+            //sset colour of text depending on what class the artifact is
+            if(gameObject.GetComponent<ArtifactData>().artifactClass == 1)
+            {
+                //set colour to blue
+                artifactValueDisplay.GetComponent<Text>().color = blue;
+            }
+            else if(gameObject.GetComponent<ArtifactData>().artifactClass == 2)
+            {
+                //set colour to orange
+                artifactValueDisplay.GetComponent<Text>().color = orange;
+            }
+            else
+            {
+                //set colour to purple
+                artifactValueDisplay.GetComponent<Text>().color = purple;
+            }
 
-            //if gun 0 is active in the hierarchy...
-            if (guns[0].activeInHierarchy == true)
+                //if gun 0 is active in the hierarchy...
+                if (guns[0].activeInHierarchy == true)
             {
                 activeGun = 0;
             }

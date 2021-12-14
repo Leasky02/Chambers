@@ -9,7 +9,12 @@ public class ArtifactData : MonoBehaviour
 
     //variable containing artifact class
     //1 = low, 2 = medium, 3 = high
-    private int artifactClass;
+    [HideInInspector] public int artifactClass;
+
+    //colours
+    private Color blue = new Color(123f / 255f, 157f / 255f, 230f / 255f, 1f);
+    private Color orange = new Color(230f / 255f, 107f / 255f, 21f / 255f, 1f);
+    private Color purple = new Color(230f / 255f, 64f / 255f, 227f / 255f, 1f);
 
     // Start is called before the first frame update
     void Start()
@@ -27,18 +32,24 @@ public class ArtifactData : MonoBehaviour
                 value = 50;
                 //set value randomly
                 value = Random.Range(value - 10, value + 10);
+                //set colour of outline
+                gameObject.transform.GetChild(0).GetComponent<Outline>().OutlineColor = blue;
                 break;
             case 2:
                 //set the value
                 value = 80;
                 //set value randomly
                 value = Random.Range(value - 10, value + 10);
+                //set colour of outline
+                gameObject.transform.GetChild(0).GetComponent<Outline>().OutlineColor = orange;
                 break;
             case 3:
                 //set the value
                 value = 120;
                 //set value randomly
                 value = Random.Range(value - 10, value + 10);
+                //set colour of outline
+                gameObject.transform.GetChild(0).GetComponent<Outline>().OutlineColor = purple;
                 break;
         }
     }

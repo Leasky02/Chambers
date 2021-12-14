@@ -36,6 +36,9 @@ public class SceneController : MonoBehaviour
         //wait for 1 second
         yield return new WaitForSeconds(1);
         //load scene
+        //set game and music started to false
+        EventController.gameStarted = false;
+        EventController.musicStarted = false;
         SceneManager.LoadScene(sceneToLoad);
     }
 }
