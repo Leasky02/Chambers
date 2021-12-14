@@ -9,7 +9,7 @@ public class ArtifactData : MonoBehaviour
 
     //variable containing artifact class
     //1 = low, 2 = medium, 3 = high
-    [HideInInspector] public int artifactClass;
+    public int artifactClass;
 
     //colours
     private Color blue = new Color(123f / 255f, 157f / 255f, 230f / 255f, 1f);

@@ -12,7 +12,10 @@ public class Timer : MonoBehaviour
     //variable that contains timer text;
     [SerializeField] private Text displayText;
     [HideInInspector] public bool takingAway = false;
+    //if timer should run
     private bool runTimer = false;
+    //changeColour
+    private bool changeColour = true;
 
     //event controller
     [SerializeField] private GameObject eventManager;
@@ -52,7 +55,7 @@ public class Timer : MonoBehaviour
         }
 
         //if there is less than 10 seconds left
-        if(seconds < 10)
+        if (seconds < 10)
         {
             displayText.text = minutes + ":0" + seconds;
         }
@@ -67,6 +70,27 @@ public class Timer : MonoBehaviour
             //delay to test for win/lose
             Invoke("EndGame", 0.5f);
         }
+
+        //if there is less than 30 seconds left
+        if (seconds <= 30 && minutes == 0)
+        {
+            //if it should change to red
+            if(changeColour)
+            {
+                //change to red
+                displayText.color = new Color(1, 0, 0, 1);
+            }
+            //if not, change to white
+            else
+            {
+                //change to white
+                displayText.color = new Color(1, 1, 1, 1);
+            }
+            //set changeColour to opposite of itself
+            changeColour = !changeColour;
+
+        }
+
         //set variable to say it has FINISHED changing the time
         takingAway = false;
     }

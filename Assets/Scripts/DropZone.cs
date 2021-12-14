@@ -8,18 +8,30 @@ public class DropZone : MonoBehaviour
     [SerializeField] private GameObject score;
     //variable holding the cash sound
     [SerializeField] private AudioClip cashSound;
+    //variable to check for collisions
+    private bool checkCollisions = true;
 
     //when object collides
     private void OnCollisionEnter(Collision collision)
     {
         //if object is an artifact
-        if(collision.collider.CompareTag("Artifact"))
+        if(collision.collider.CompareTag("Artifact") && checkCollisions)
         {
+            //stop from detecting collisions with artifacts
+            checkCollisions = false;
+            Invoke("ChangeCollisionDetection", 0.1f);
+
             Debug.Log(collision.gameObject + "This should only be shown once");
+
             //add the score of the artifact to the score object
             score.GetComponent<Score>().AddScore(collision.gameObject.GetComponent<ArtifactData>().value);
             RemoveArtifact(collision.gameObject);
         }
+    }
+    //used to restart detecting for artifacts
+    public void ChangeCollisionDetection()
+    {
+        checkCollisions = true;
     }
     //method to destroy artifact and trigger particle effect
     public void RemoveArtifact(GameObject artifact)
