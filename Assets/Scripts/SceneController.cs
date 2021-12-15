@@ -39,6 +39,7 @@ public class SceneController : MonoBehaviour
         //set game and music started to false
         EventController.gameStarted = false;
         EventController.musicStarted = false;
+        EventController.gameOver = false;
         SceneManager.LoadScene(sceneToLoad);
     }
 }

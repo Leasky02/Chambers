@@ -21,8 +21,6 @@ public class DropZone : MonoBehaviour
             checkCollisions = false;
             Invoke("ChangeCollisionDetection", 0.1f);
 
-            Debug.Log(collision.gameObject + "This should only be shown once");
-
             //add the score of the artifact to the score object
             score.GetComponent<Score>().AddScore(collision.gameObject.GetComponent<ArtifactData>().value);
             RemoveArtifact(collision.gameObject);

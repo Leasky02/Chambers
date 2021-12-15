@@ -38,6 +38,7 @@ public class EventController : MonoBehaviour
     //variable to say if game has started
     public static bool gameStarted = false;
     public static bool musicStarted = false;
+    public static bool gameOver = false;
 
     //contains if player is in or out of the chambers
     private bool isOutside;
@@ -51,6 +52,8 @@ public class EventController : MonoBehaviour
 
     //variable to hold money sound
     [SerializeField] private AudioClip moneyComplete;
+    //variable to hold lose sound
+    [SerializeField] private AudioClip loseSound;
 
     private void Update()
     {
@@ -115,8 +118,8 @@ public class EventController : MonoBehaviour
     {
         //queue the game to start in x seconds
         StartTimer();
-        Invoke("StartAnimation", 7f);
-        Invoke("PlayMusic", 4.5f);
+        Invoke("StartAnimation", 3f);
+        Invoke("PlayMusic", 0.5f);
     }
 
     public void StartTimer()
@@ -168,6 +171,9 @@ public class EventController : MonoBehaviour
         //set mouse to visible
         //locks cursor to game
         Cursor.lockState = CursorLockMode.None;
+
+        //set game as over
+        gameOver = true;
     }
 
     public void WinGame()
@@ -189,6 +195,13 @@ public class EventController : MonoBehaviour
     {
         //set the lose screen to visible
         loseScreenCanvas.SetActive(true);
+
+        //stop sound
+        //play sound of score adding up
+        GetComponent<AudioSource>().Stop();
+        GetComponent<AudioSource>().clip = loseSound;
+        GetComponent<AudioSource>().loop = false;
+        GetComponent<AudioSource>().Play();
     }
 
     private void StartTally()
