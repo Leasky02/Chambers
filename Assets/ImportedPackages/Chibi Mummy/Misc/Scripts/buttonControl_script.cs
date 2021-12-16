@@ -45,6 +45,7 @@ public class buttonControl_script : MonoBehaviour
 
 	public void Dance()
 	{
-		anim.SetBool ("dancing", !(anim.GetBool("dancing")));
+		anim.SetBool("isIdle", true);
+		anim.SetBool ("dancing", true);
 	}
 }

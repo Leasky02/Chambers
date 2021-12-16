@@ -59,10 +59,35 @@ public class EnemyNavMesh : MonoBehaviour
         {
             enemyAnimator.GetComponent<buttonControl_script>().EndCrippledWalk();
             enemyAnimator.GetComponent<buttonControl_script>().Idle();
-            //chase after players position
+            //chase after nothing
             navMesh.destination = transform.position;
             checkToStop = false;
         }
+        if(EventController.gameOver)
+        {
+            //if player has lost game
+            if (player.transform.position.y < 10.4f)
+            {
+                //celebrate
+                Invoke("Celebrate", Random.Range(0f, 2f));
+            }
+            else
+            {
+                //stop and dance
+                enemyAnimator.GetComponent<buttonControl_script>().EndRun();
+                enemyAnimator.GetComponent<buttonControl_script>().EndCrippledWalk();
+                navMesh.destination = transform.position;
+            }
+        }
+    }
+
+    public void Celebrate()
+    {
+        //stop and dance
+        enemyAnimator.GetComponent<buttonControl_script>().EndRun();
+        enemyAnimator.GetComponent<buttonControl_script>().EndCrippledWalk();
+        enemyAnimator.GetComponent<buttonControl_script>().Dance();
+        navMesh.destination = transform.position;
     }
 
     public void ChasePlayer()

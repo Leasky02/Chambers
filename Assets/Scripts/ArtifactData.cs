@@ -7,6 +7,8 @@ public class ArtifactData : MonoBehaviour
     //variables containing artifact value
     public int value;
 
+    public static float difficultyValue;
+
     //variable containing artifact class
     //1 = low, 2 = medium, 3 = high
     public int artifactClass;
@@ -32,6 +34,8 @@ public class ArtifactData : MonoBehaviour
                 value = 50;
                 //set value randomly
                 value = Random.Range(value - 10, value + 10);
+                //multiply value according to difficulty
+                value = Mathf.RoundToInt(value * difficultyValue);
                 //set colour of outline
                 gameObject.transform.GetChild(0).GetComponent<Outline>().OutlineColor = blue;
                 break;
@@ -40,6 +44,8 @@ public class ArtifactData : MonoBehaviour
                 value = 80;
                 //set value randomly
                 value = Random.Range(value - 10, value + 10);
+                //multiply value according to difficulty
+                value = Mathf.RoundToInt(value * difficultyValue);
                 //set colour of outline
                 gameObject.transform.GetChild(0).GetComponent<Outline>().OutlineColor = orange;
                 break;
@@ -48,6 +54,8 @@ public class ArtifactData : MonoBehaviour
                 value = 120;
                 //set value randomly
                 value = Random.Range(value - 10, value + 10);
+                //multiply value according to difficulty
+                value = Mathf.RoundToInt(value * difficultyValue);
                 //set colour of outline
                 gameObject.transform.GetChild(0).GetComponent<Outline>().OutlineColor = purple;
                 break;

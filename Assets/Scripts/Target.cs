@@ -32,6 +32,7 @@ public class Target : MonoBehaviour
         GetComponent<CapsuleCollider>().enabled = false;
         GetComponent<Rigidbody>().isKinematic = false;
         GetComponent<EnemyNavMesh>().enabled = false;
+        GetComponent<EnemyDamage>().enabled = false;
         //destroy model
         Destroy(gameObject.transform.GetChild(0).gameObject);
         //destroy parent object

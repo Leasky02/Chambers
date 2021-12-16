@@ -16,6 +16,7 @@ public class EventController : MonoBehaviour
     [SerializeField] private GameObject winScreenCanvas;
     //lose screen canvas
     [SerializeField] private GameObject loseScreenCanvas;
+    [SerializeField] private Text loseScreenMessage;
 
     //music
     [SerializeField] private AudioSource musicPlayer;
@@ -58,7 +59,7 @@ public class EventController : MonoBehaviour
     private void Update()
     {
         //if player is out side chambers above y=10
-        if(player.transform.position.y >= 10)
+        if(player.transform.position.y >= 10.4f)
         {
             //set is player outside to true
             isOutside = true;
@@ -195,6 +196,7 @@ public class EventController : MonoBehaviour
     {
         //set the lose screen to visible
         loseScreenCanvas.SetActive(true);
+        loseScreenMessage.text = "YOU'RE TRAPPED!";
 
         //stop sound
         //play sound of score adding up
@@ -202,6 +204,42 @@ public class EventController : MonoBehaviour
         GetComponent<AudioSource>().clip = loseSound;
         GetComponent<AudioSource>().loop = false;
         GetComponent<AudioSource>().Play();
+    }
+
+    public void Die()
+    {
+        //stop music
+        musicPlayer.Stop();
+        //set the lose screen to visible
+        loseScreenCanvas.SetActive(true);
+        loseScreenMessage.text = "YOU DIED!";
+
+        //stop sound
+        //play sound of score adding up
+        GetComponent<AudioSource>().Stop();
+        GetComponent<AudioSource>().clip = loseSound;
+        GetComponent<AudioSource>().loop = false;
+        GetComponent<AudioSource>().Play();
+
+        //disable other UI components
+        artifactCanvas.SetActive(false);
+        timerCanvas.SetActive(false);
+        scoreCanvas.SetActive(false);
+
+        //disable player movement
+        player.GetComponent<PlayerMovement>().enabled = false;
+        mainCamera.GetComponent<MoveLook>().enabled = false;
+
+        //disable the guns
+        pistol.SetActive(false);
+        rifle.SetActive(false);
+
+        //set mouse to visible
+        //locks cursor to game
+        Cursor.lockState = CursorLockMode.None;
+
+        //set game as over
+        gameOver = true;
     }
 
     private void StartTally()

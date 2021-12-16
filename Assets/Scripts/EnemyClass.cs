@@ -10,7 +10,8 @@ public class EnemyClass : MonoBehaviour
     //variable containing the enemy health
 
     //static difficulty speed
-    static float difficultySpeed = 1f;
+    public static float difficultySpeed = 1f;
+    public static float difficultyDamage = 1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +33,8 @@ public class EnemyClass : MonoBehaviour
                 gameObject.transform.GetChild(0).GetComponent<Animator>().speed = gameObject.transform.GetChild(0).GetComponent<Animator>().speed * 1.9f;
                 //set health
                 gameObject.GetComponent<Target>().health = 25;
+                //set damage
+                gameObject.GetComponent<EnemyDamage>().damage = 12f * difficultyDamage;
 
                 break;
             //if class 2 (medium size and speed)
@@ -44,6 +47,8 @@ public class EnemyClass : MonoBehaviour
                 gameObject.transform.GetChild(0).GetComponent<Animator>().speed = gameObject.transform.GetChild(0).GetComponent<Animator>().speed * 1.6f;
                 //set health
                 gameObject.GetComponent<Target>().health = 35;
+                //set damage
+                gameObject.GetComponent<EnemyDamage>().damage = 17f * difficultyDamage;
 
                 break;
             //if class 3 (large and slow)
@@ -54,6 +59,8 @@ public class EnemyClass : MonoBehaviour
                 gameObject.GetComponent<NavMeshAgent>().speed = 2.2f * difficultySpeed;
                 //set health
                 gameObject.GetComponent<Target>().health = 50;
+                //set damage
+                gameObject.GetComponent<EnemyDamage>().damage = 23f * difficultyDamage;
 
                 break;
         }
