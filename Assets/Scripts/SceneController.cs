@@ -40,6 +40,7 @@ public class SceneController : MonoBehaviour
         EventController.gameStarted = false;
         EventController.musicStarted = false;
         EventController.gameOver = false;
+        PauseMenuController.allowPause = false;
         SceneManager.LoadScene(sceneToLoad);
     }
 }

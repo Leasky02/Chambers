@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 2364299556320180357}
   - component: {fileID: 6140906749160779496}
   - component: {fileID: 8532558889935074685}
+  - component: {fileID: 3079076008861383854}
   m_Layer: 0
   m_Name: Room4(small, 3)
   m_TagString: Untagged
@@ -123,6 +124,24 @@ MonoBehaviour:
   AmmoPrefabs:
   - {fileID: 569742585518866421, guid: eb01d4adfbe544b448f0325c1ba27f6f, type: 3}
   - {fileID: 7829323644090820272, guid: 5e34c929466c59343aaa42eb312e93d4, type: 3}
+--- !u!114 &3079076008861383854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2649580608429013179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c7e552d2c150274ba7a0f24f8106f6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnAttempts: 2
+  roomX1: -5
+  roomX2: 5
+  roomZ1: -1
+  roomZ2: 9
+  enemyPrefab: {fileID: 8851211247411752511, guid: 4ccf2677e1cdb6c49987e2e40cb18f33, type: 3}
 --- !u!1 &3256048908627380277
 GameObject:
   m_ObjectHideFlags: 0

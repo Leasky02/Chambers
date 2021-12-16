@@ -49,6 +49,8 @@ public class Gun : MonoBehaviour
     [SerializeField] private ParticleSystem muzzleFlash;
     //impact particles
     [SerializeField] private GameObject impactEffect;
+    [SerializeField] private GameObject bandageImpactEffect;
+    [SerializeField] private GameObject numberImpactEffect;
 
     //start method
     private void Start()
@@ -227,13 +229,26 @@ public class Gun : MonoBehaviour
             //if the hit object DOES have a rigidbody...
             if(hit.rigidbody != null)
             {
-                Debug.Log("Hit");
+                //Debug.Log("Hit");
                 hit.rigidbody.AddForce(-hit.normal * force);
             }
-            //creates iumpact particles where hit
-            GameObject particles = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-            //destroys particles later
-            Destroy(particles, 1f);
+            if(hit.collider.CompareTag("Enemy"))
+            {
+                //creates bandage impact particles where hit
+                GameObject particles = Instantiate(bandageImpactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                //destroys particles later
+                Destroy(particles, 1f);
+                GameObject numberParticles = Instantiate(numberImpactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                //destroys particles later
+                Destroy(numberParticles, 1f);
+            }
+            else
+            {
+                //creates impact particles where hit
+                GameObject particles = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                //destroys particles later
+                Destroy(particles, 1f);
+            }
         }
 
         //use 1 ammo

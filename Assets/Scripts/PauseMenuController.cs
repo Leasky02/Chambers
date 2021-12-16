@@ -19,6 +19,23 @@ public class PauseMenuController : MonoBehaviour
     //variable containing if game has been paused
     [HideInInspector] public bool paused = false;
 
+    public static bool allowPause = false;
+
+    //start called on first frame
+    private void Start()
+    {
+        Invoke("AllowPause", 2f);
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        //if escape is pressed & game isnt already over & isnt already paused & is allowed to pause
+        if (Input.GetKeyDown(KeyCode.Escape) && !EventController.gameOver && !paused && allowPause)
+        {
+            PauseGame();
+        }
+    }
+
     public void PauseGame()
     {
         //hide UI elements
@@ -72,13 +89,9 @@ public class PauseMenuController : MonoBehaviour
         //set game as unpaused
         paused = false;
     }
-
-    // Update is called once per frame
-    void Update()
+    //allow game to be paused
+    public void AllowPause()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !EventController.gameOver && !paused)
-        {
-            PauseGame();
-        }
+        allowPause = true;
     }
 }

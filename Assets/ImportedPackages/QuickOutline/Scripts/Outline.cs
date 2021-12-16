@@ -14,6 +14,8 @@ using UnityEngine;
 [DisallowMultipleComponent]
 
 public class Outline : MonoBehaviour {
+
+    [SerializeField] private Transform playerPosition;
   private static HashSet<Mesh> registeredMeshes = new HashSet<Mesh>();
 
   public enum Mode {
@@ -82,6 +84,7 @@ public class Outline : MonoBehaviour {
 
   void Awake() {
 
+        playerPosition = GameObject.Find("Player").transform;
     // Cache renderers
     renderers = GetComponentsInChildren<Renderer>();
 
@@ -130,11 +133,9 @@ public class Outline : MonoBehaviour {
   }
 
   void Update() {
-    if (needsUpdate) {
-      needsUpdate = false;
-
+        float distance = Vector3.Distance(gameObject.transform.position, playerPosition.position);
+        outlineColor = new Color(outlineColor.r, outlineColor.g, outlineColor.b, (30-distance) / 30f);
       UpdateMaterialProperties();
-    }
   }
 
   void OnDisable() {
