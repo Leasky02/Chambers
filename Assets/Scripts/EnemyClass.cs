@@ -34,7 +34,7 @@ public class EnemyClass : MonoBehaviour
                 //set health
                 gameObject.GetComponent<Target>().health = 25;
                 //set damage
-                gameObject.GetComponent<EnemyDamage>().damage = 12f * difficultyDamage;
+                gameObject.GetComponent<EnemyDamage>().damage = 7f * difficultyDamage;
 
                 break;
             //if class 2 (medium size and speed)
@@ -42,13 +42,13 @@ public class EnemyClass : MonoBehaviour
                 //set scale of child so it doesnt effect speed
                 gameObject.transform.GetChild(0).localScale = new Vector3(2.75f, 2.75f, 2.75f);
                 //set speed
-                gameObject.GetComponent<NavMeshAgent>().speed = 2.6f * difficultySpeed;
+                gameObject.GetComponent<NavMeshAgent>().speed = 2.3f * difficultySpeed;
                 //set animator speed
                 gameObject.transform.GetChild(0).GetComponent<Animator>().speed = gameObject.transform.GetChild(0).GetComponent<Animator>().speed * 1.6f;
                 //set health
                 gameObject.GetComponent<Target>().health = 35;
                 //set damage
-                gameObject.GetComponent<EnemyDamage>().damage = 17f * difficultyDamage;
+                gameObject.GetComponent<EnemyDamage>().damage = 12f * difficultyDamage;
 
                 break;
             //if class 3 (large and slow)
@@ -56,11 +56,11 @@ public class EnemyClass : MonoBehaviour
                 //set scale of child so it doesnt effect speed
                 gameObject.transform.GetChild(0).localScale = new Vector3(3f, 3f, 3f);
                 //set speed
-                gameObject.GetComponent<NavMeshAgent>().speed = 2f * difficultySpeed;
+                gameObject.GetComponent<NavMeshAgent>().speed = 1.7f * difficultySpeed;
                 //set health
                 gameObject.GetComponent<Target>().health = 50;
                 //set damage
-                gameObject.GetComponent<EnemyDamage>().damage = 23f * difficultyDamage;
+                gameObject.GetComponent<EnemyDamage>().damage = 18f * difficultyDamage;
 
                 break;
         }

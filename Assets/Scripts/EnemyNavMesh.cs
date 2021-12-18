@@ -45,7 +45,7 @@ public class EnemyNavMesh : MonoBehaviour
             enemyAnimator.GetComponent<buttonControl_script>().StartRun();
         }
         //if player is further than 32 units away from self and is currently chasing the player
-        else if(Vector3.Distance(gameObject.transform.position, player.transform.position) > 32f && chase == true)
+        else if(Vector3.Distance(gameObject.transform.position, player.transform.position) > 25f && chase == true)
         {
             //end chase
             StopChase();

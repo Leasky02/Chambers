@@ -43,13 +43,13 @@ public class InventorySlot : MonoBehaviour
     private Color orange = new Color(230f / 255f, 107f / 255f, 21f / 255f, 1f);
     private Color purple = new Color(230f / 255f, 64f / 255f, 227f / 255f, 1f);
 
-    private void Awake()
+    private void OnEnable()
     {
         //assign all objects to variables
         fpsCam = GameObject.Find("Main Camera").transform;
         player = GameObject.Find("Player");
-        guns[0] = GameObject.Find("Handgun_01");
-        guns[1] = GameObject.Find("Assault_Rifle_01");
+        guns[0] = fpsCam.GetChild(1).gameObject;
+        guns[1] = fpsCam.GetChild(2).gameObject;
         artifactContainer = GameObject.Find("Artifact Container");
         artifactValueDisplay = GameObject.Find("ValueDisplay");
         
@@ -125,8 +125,8 @@ public class InventorySlot : MonoBehaviour
                 artifactValueDisplay.GetComponent<Text>().color = purple;
             }
 
-                //if gun 0 is active in the hierarchy...
-                if (guns[0].activeInHierarchy == true)
+            //if gun 0 is active in the hierarchy...
+            if (guns[0].activeInHierarchy == true)
             {
                 activeGun = 0;
             }

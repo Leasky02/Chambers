@@ -33,7 +33,7 @@ public class PauseMenuController : MonoBehaviour
         //if escape is pressed & game isnt already over & isnt already paused & is allowed to pause
         if (Input.GetKeyDown(KeyCode.Escape) && !EventController.gameOver && !paused && allowPause)
         {
-            //PauseGame();
+            PauseGame();
         }
     }
 

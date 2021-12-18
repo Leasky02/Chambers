@@ -7,7 +7,7 @@ public class ArtifactData : MonoBehaviour
     //variables containing artifact value
     public int value;
 
-    public static float difficultyValue;
+    public static float difficultyValue = 1f;
 
     //variable containing artifact class
     //1 = low, 2 = medium, 3 = high

@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c7e552d2c150274ba7a0f24f8106f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnAttempts: 2
+  spawnAttempts: 1
   roomX1: -5
   roomX2: 5
   roomZ1: -1
