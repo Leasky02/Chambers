@@ -32,7 +32,7 @@ public class EnemyClass : MonoBehaviour
                 //set animator speed
                 gameObject.transform.GetChild(0).GetComponent<Animator>().speed = gameObject.transform.GetChild(0).GetComponent<Animator>().speed * 1.9f;
                 //set health
-                gameObject.GetComponent<Target>().health = 25;
+                gameObject.GetComponent<Target>().health = 21;
                 //set damage
                 gameObject.GetComponent<EnemyDamage>().damage = 7f * difficultyDamage;
 
@@ -46,7 +46,7 @@ public class EnemyClass : MonoBehaviour
                 //set animator speed
                 gameObject.transform.GetChild(0).GetComponent<Animator>().speed = gameObject.transform.GetChild(0).GetComponent<Animator>().speed * 1.6f;
                 //set health
-                gameObject.GetComponent<Target>().health = 35;
+                gameObject.GetComponent<Target>().health = 28;
                 //set damage
                 gameObject.GetComponent<EnemyDamage>().damage = 12f * difficultyDamage;
 
@@ -58,7 +58,7 @@ public class EnemyClass : MonoBehaviour
                 //set speed
                 gameObject.GetComponent<NavMeshAgent>().speed = 1.7f * difficultySpeed;
                 //set health
-                gameObject.GetComponent<Target>().health = 50;
+                gameObject.GetComponent<Target>().health = 40;
                 //set damage
                 gameObject.GetComponent<EnemyDamage>().damage = 18f * difficultyDamage;
 

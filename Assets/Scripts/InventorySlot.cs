@@ -43,8 +43,10 @@ public class InventorySlot : MonoBehaviour
     private Color orange = new Color(230f / 255f, 107f / 255f, 21f / 255f, 1f);
     private Color purple = new Color(230f / 255f, 64f / 255f, 227f / 255f, 1f);
 
-    private void OnEnable()
+    private void Start()
     {
+        slotFull = false;
+
         //assign all objects to variables
         fpsCam = GameObject.Find("Main Camera").transform;
         player = GameObject.Find("Player");
