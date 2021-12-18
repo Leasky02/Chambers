@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class EventController : MonoBehaviour
 {
     //variables containing UI element canvases
     [SerializeField] private GameObject artifactCanvas;
     [SerializeField] private GameObject timerCanvas;
+    [SerializeField] private GameObject healthCanvas;
     [SerializeField] private GameObject scoreCanvas;
     [SerializeField] private GameObject pistol;
     [SerializeField] private GameObject rifle;
@@ -24,6 +26,9 @@ public class EventController : MonoBehaviour
     [SerializeField] private GameObject timerManager;
     //door entrance
     [SerializeField] private Animator doorAnimator;
+    //drop zone object
+    [SerializeField] private GameObject dropZone;
+
     //score manager
     [SerializeField] private Text scoreDisplay;
     [SerializeField] private Text overallScoreDisplay;
@@ -59,7 +64,7 @@ public class EventController : MonoBehaviour
     private void Update()
     {
         //if player is out side chambers above y=10
-        if(player.transform.position.y >= 10.4f)
+        if(player.transform.position.y >= 8.96f)
         {
             //set is player outside to true
             isOutside = true;
@@ -76,6 +81,7 @@ public class EventController : MonoBehaviour
                 gameStarted = true;
             }
         }
+        Debug.Log(isOutside);
         //take one off score and add one to overall score
         if(switchScore)
         {
@@ -156,10 +162,13 @@ public class EventController : MonoBehaviour
             LoseGame();
         }
 
+        //disable drop zone
+        dropZone.SetActive(false);
         //disable other UI components
         artifactCanvas.SetActive(false);
         timerCanvas.SetActive(false);
         scoreCanvas.SetActive(false);
+        healthCanvas.SetActive(false);
 
         //disable player movement
         player.GetComponent<PlayerMovement>().enabled = false;
@@ -208,6 +217,8 @@ public class EventController : MonoBehaviour
 
     public void Die()
     {
+        //hide health bar
+        healthCanvas.SetActive(false);
         //stop music
         musicPlayer.Stop();
         //set the lose screen to visible

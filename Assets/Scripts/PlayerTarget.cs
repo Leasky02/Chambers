@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerTarget : MonoBehaviour
 {
+    //difficulty health regen multiplier
+    public static float healthRegenDifficulty = 1f;
     //health
     public float health = 100;
     //difficulty multiplier for health
@@ -55,7 +57,7 @@ public class PlayerTarget : MonoBehaviour
     
     public void Regenerate()
     {
-        health += 5;
+        health += 5 * healthRegenDifficulty;
         if (health > 100)
             health = 100;
         //update health bar

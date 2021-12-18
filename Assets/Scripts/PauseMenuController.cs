@@ -8,6 +8,7 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private GameObject artifactCanvas;
     [SerializeField] private GameObject timerCanvas;
     [SerializeField] private GameObject MenuButtons;
+    [SerializeField] private GameObject player;
     //guns
     [SerializeField] private GameObject pistol;
     [SerializeField] private GameObject rifle;
@@ -32,12 +33,14 @@ public class PauseMenuController : MonoBehaviour
         //if escape is pressed & game isnt already over & isnt already paused & is allowed to pause
         if (Input.GetKeyDown(KeyCode.Escape) && !EventController.gameOver && !paused && allowPause)
         {
-            PauseGame();
+            //PauseGame();
         }
     }
 
     public void PauseGame()
     {
+        //disable audio source of player
+        player.GetComponent<AudioSource>().enabled = false;
         //hide UI elements
         artifactCanvas.SetActive(false);
         timerCanvas.SetActive(false);
@@ -64,6 +67,8 @@ public class PauseMenuController : MonoBehaviour
 
     public void UnpauseGame()
     {
+        //disable audio source of player
+        player.GetComponent<AudioSource>().enabled = true;
         //show UI elements
         artifactCanvas.SetActive(true);
         timerCanvas.SetActive(true);

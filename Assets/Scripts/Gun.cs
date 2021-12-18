@@ -232,7 +232,7 @@ public class Gun : MonoBehaviour
                 //Debug.Log("Hit");
                 hit.rigidbody.AddForce(-hit.normal * force);
             }
-            if(hit.collider.CompareTag("Enemy"))
+            if(hit.collider.CompareTag("EnemyRig"))
             {
                 //creates bandage impact particles where hit
                 GameObject particles = Instantiate(bandageImpactEffect, hit.point, Quaternion.LookRotation(hit.normal));

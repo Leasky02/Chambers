@@ -13,7 +13,7 @@ public class EnemyClass : MonoBehaviour
     public static float difficultySpeed = 1f;
     public static float difficultyDamage = 1f;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //set class randomly between 1 and 3
         enemyClass = Random.Range(1, 4);
@@ -28,7 +28,7 @@ public class EnemyClass : MonoBehaviour
                 //set scale of child so it doesnt effect speed
                 gameObject.transform.GetChild(0).localScale = new Vector3(1.8f, 1.8f, 1.8f);
                 //set speed
-                gameObject.GetComponent<NavMeshAgent>().speed = 3.4f * difficultySpeed;
+                gameObject.GetComponent<NavMeshAgent>().speed = 3.2f * difficultySpeed;
                 //set animator speed
                 gameObject.transform.GetChild(0).GetComponent<Animator>().speed = gameObject.transform.GetChild(0).GetComponent<Animator>().speed * 1.9f;
                 //set health
@@ -42,7 +42,7 @@ public class EnemyClass : MonoBehaviour
                 //set scale of child so it doesnt effect speed
                 gameObject.transform.GetChild(0).localScale = new Vector3(2.75f, 2.75f, 2.75f);
                 //set speed
-                gameObject.GetComponent<NavMeshAgent>().speed = 2.8f * difficultySpeed;
+                gameObject.GetComponent<NavMeshAgent>().speed = 2.6f * difficultySpeed;
                 //set animator speed
                 gameObject.transform.GetChild(0).GetComponent<Animator>().speed = gameObject.transform.GetChild(0).GetComponent<Animator>().speed * 1.6f;
                 //set health
@@ -56,7 +56,7 @@ public class EnemyClass : MonoBehaviour
                 //set scale of child so it doesnt effect speed
                 gameObject.transform.GetChild(0).localScale = new Vector3(3f, 3f, 3f);
                 //set speed
-                gameObject.GetComponent<NavMeshAgent>().speed = 2.2f * difficultySpeed;
+                gameObject.GetComponent<NavMeshAgent>().speed = 2f * difficultySpeed;
                 //set health
                 gameObject.GetComponent<Target>().health = 50;
                 //set damage

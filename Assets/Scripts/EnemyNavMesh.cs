@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,14 +11,17 @@ public class EnemyNavMesh : MonoBehaviour
     [SerializeField] private GameObject enemyAnimator;
 
     //variable to determine if should chase player
-    private bool chase;
-    private bool checkToStop;
+    public bool chase;
+    public bool checkToStop = true;
+
+    //speed
+    private float speed;
 
     //original position
     private Vector3 originalPosition;
 
     //awake
-    private void Awake()
+    private void Start()
     {
         //set navmesh to component
         navMesh = GetComponent<NavMeshAgent>();
@@ -28,18 +29,19 @@ public class EnemyNavMesh : MonoBehaviour
         player = GameObject.Find("Player");
         //set original position to current position
         originalPosition = transform.position;
+        //set speed to original speed
+        speed = navMesh.speed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if player is within 18 units of self and isnt already chasing the player
-        if (Vector3.Distance(gameObject.transform.position, player.transform.position) < 18f && chase == false)
+        //if player is within 18 units of self and isnt already chasing the player and player is in the chambers
+        if (Vector3.Distance(gameObject.transform.position, player.transform.position) < 18f && chase == false && player.transform.position.y <= 8.96f)
         {
             //chase player
             chase = true;
-            //speed enemy up
-            navMesh.speed = navMesh.speed * 2;
+            Debug.Log(navMesh.speed);
             enemyAnimator.GetComponent<buttonControl_script>().StartRun();
         }
         //if player is further than 32 units away from self and is currently chasing the player
@@ -48,6 +50,7 @@ public class EnemyNavMesh : MonoBehaviour
             //end chase
             StopChase();
         }
+
         //if should chase player
         if(chase)
         {
@@ -55,13 +58,14 @@ public class EnemyNavMesh : MonoBehaviour
             ChasePlayer();
         }
         //if enemy is home
-        if(Vector3.Distance(gameObject.transform.position, new Vector3(originalPosition.x, gameObject.transform.position.y, originalPosition.z)) < 3 && checkToStop)
+        if (Vector3.Distance(gameObject.transform.position, navMesh.destination) < 20 && checkToStop && !chase)
         {
             enemyAnimator.GetComponent<buttonControl_script>().EndCrippledWalk();
             enemyAnimator.GetComponent<buttonControl_script>().Idle();
             //chase after nothing
             navMesh.destination = transform.position;
             checkToStop = false;
+            Invoke("RandomLocation", Random.Range(1f, 2f));
         }
         if(EventController.gameOver)
         {
@@ -81,6 +85,19 @@ public class EnemyNavMesh : MonoBehaviour
         }
     }
 
+    public void RandomLocation()
+    {
+        navMesh.speed = speed / 2;
+        //check to stop 
+        checkToStop = true;
+        //play walking animation
+        enemyAnimator.GetComponent<buttonControl_script>().EndRun();
+        enemyAnimator.GetComponent<buttonControl_script>().StartCrippledWalk();
+        //set position randomly within chambers
+        navMesh.destination = new Vector3(Random.Range(-95f, 125f), transform.position.y, Random.Range(-120f, 120f));
+        navMesh.stoppingDistance = 20;
+    }
+
     public void Celebrate()
     {
         //stop and dance
@@ -94,6 +111,9 @@ public class EnemyNavMesh : MonoBehaviour
     {
         //chase after players position
         navMesh.destination = player.transform.position;
+        navMesh.stoppingDistance = 1.3f;
+        //speed enemy up
+        navMesh.speed = speed * 2;
     }
 
     public void StopChase()
@@ -101,12 +121,8 @@ public class EnemyNavMesh : MonoBehaviour
         //stop chasing player
         chase = false;
         //slow enemy down
-        navMesh.speed = navMesh.speed / 2;
-        //return to original position
-        navMesh.destination = originalPosition;
-        //play walking animation
-        enemyAnimator.GetComponent<buttonControl_script>().EndRun();
-        enemyAnimator.GetComponent<buttonControl_script>().StartCrippledWalk();
-        checkToStop = true;
+        navMesh.speed = speed / 2;
+        //Move to random location
+        RandomLocation();
     }
 }

@@ -8,6 +8,9 @@ public class Target : MonoBehaviour
     public float health;
     //death sound
     [SerializeField] private AudioClip deathSound;
+    //mummy prefab
+    [SerializeField] private GameObject mummy;
+
     //remove damage from object
     public void TakeDamage(float amount)
     {
@@ -33,6 +36,7 @@ public class Target : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = false;
         GetComponent<EnemyNavMesh>().enabled = false;
         GetComponent<EnemyDamage>().enabled = false;
+        GetComponent<EnemyAudio>().enabled = false;
         //destroy model
         Destroy(gameObject.transform.GetChild(0).gameObject);
         //destroy parent object

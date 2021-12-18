@@ -11,6 +11,8 @@ public class DifficultyChanger : MonoBehaviour
         EnemyClass.difficultySpeed = 0.8f;
         //increase health
         PlayerTarget.difficultyHealth = 1.2f;
+        //increase health regen
+        PlayerTarget.healthRegenDifficulty = 1.2f;
         //set value of artifact
         ArtifactData.difficultyValue = 0.8f;
     }
@@ -21,18 +23,22 @@ public class DifficultyChanger : MonoBehaviour
         EnemyClass.difficultySpeed = 1f;
 
         PlayerTarget.difficultyHealth = 1f;
+        //increase health regen
+        PlayerTarget.healthRegenDifficulty = 1f;
         //set value of artifact
         ArtifactData.difficultyValue = 1f;
     }
     public void Hard()
     {
         //increase speed and damage of enemies
-        EnemyClass.difficultyDamage = 1.2f;
-        EnemyClass.difficultySpeed = 1.2f;
+        EnemyClass.difficultyDamage = 1.3f;
+        EnemyClass.difficultySpeed = 1.3f;
         //decrease player health
-        PlayerTarget.difficultyHealth = 0.8f;
+        PlayerTarget.difficultyHealth = 0.7f;
+        //increase health regen
+        PlayerTarget.healthRegenDifficulty = 0.7f;
         //set value of artifact
-        ArtifactData.difficultyValue = 1.2f;
+        ArtifactData.difficultyValue = 1.3f;
     }
 
 }

@@ -10,6 +10,7 @@ TagManager:
   - sand
   - ammo
   - Enemy
+  - EnemyRig
   layers:
   - Default
   - TransparentFX
