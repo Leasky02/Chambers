@@ -41,7 +41,6 @@ public class EnemyNavMesh : MonoBehaviour
         {
             //chase player
             chase = true;
-            Debug.Log(navMesh.speed);
             enemyAnimator.GetComponent<buttonControl_script>().StartRun();
         }
         //if player is further than 32 units away from self and is currently chasing the player
@@ -100,6 +99,8 @@ public class EnemyNavMesh : MonoBehaviour
 
     public void Celebrate()
     {
+        //chase is false
+        chase = false;
         //stop and dance
         enemyAnimator.GetComponent<buttonControl_script>().EndRun();
         enemyAnimator.GetComponent<buttonControl_script>().EndCrippledWalk();

@@ -110,16 +110,16 @@ public class InventorySlot : MonoBehaviour
             //display the value to Player
             artifactValueDisplay.GetComponent<Text>().text = ("Value: £" + gameObject.GetComponent<ArtifactData>().value);
             
-            //sset colour of text depending on what class the artifact is
+            //set colour of text depending on what class the artifact is
             if(gameObject.GetComponent<ArtifactData>().artifactClass == 1)
             {
                 //set colour to blue
-                artifactValueDisplay.GetComponent<Text>().color = blue;
+                artifactValueDisplay.GetComponent<Text>().color = orange;
             }
             else if(gameObject.GetComponent<ArtifactData>().artifactClass == 2)
             {
                 //set colour to orange
-                artifactValueDisplay.GetComponent<Text>().color = orange;
+                artifactValueDisplay.GetComponent<Text>().color = blue;
             }
             else
             {

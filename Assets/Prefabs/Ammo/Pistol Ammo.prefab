@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoPrefab: {fileID: 7850943794452305805, guid: fa270c2f95027e741be07f1adfe2a7bf, type: 3}
   ammo: 0
-  ammoBounds: 0200000008000000
+  ammoBounds: 0200000006000000
   ammoType: Pistol
 --- !u!65 &679219114076230096
 BoxCollider:

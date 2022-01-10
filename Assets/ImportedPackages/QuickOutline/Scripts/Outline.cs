@@ -134,7 +134,7 @@ public class Outline : MonoBehaviour {
 
   void Update() {
         float distance = Vector3.Distance(gameObject.transform.position, playerPosition.position);
-        outlineColor = new Color(outlineColor.r, outlineColor.g, outlineColor.b, (30-distance) / 30f);
+        outlineColor = new Color(outlineColor.r, outlineColor.g, outlineColor.b, (25-distance) / 25f);
       UpdateMaterialProperties();
   }
 

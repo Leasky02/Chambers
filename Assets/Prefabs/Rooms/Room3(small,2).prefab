@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fbb250e7289a2f4da889d5ffae9bf96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnAttempts: 3
+  spawnAttempts: 2
   roomX1: -5
   roomX2: 5
   roomZ1: -1

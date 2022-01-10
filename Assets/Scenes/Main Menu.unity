@@ -34386,10 +34386,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter the chambers and search for lost artifacts. Bring back one at a time
-    and load it into your truck. Be careful and dn't get lost! You only have 4 minutes
+  m_Text: Enter the chambers and search for lost artefacts. Bring back one at a time
+    and load it into your truck. Be careful and don't get lost! You only have 4 minutes
     before the entrance is sealed off. Think carefully and ensure your escape. You
-    might have to fight off a few skeletons as well!
+    might have to fight off a few mummies as well!
 --- !u!222 &1644721501
 CanvasRenderer:
   m_ObjectHideFlags: 0

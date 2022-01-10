@@ -37,7 +37,7 @@ public class ArtifactData : MonoBehaviour
                 //multiply value according to difficulty
                 value = Mathf.RoundToInt(value * difficultyValue);
                 //set colour of outline
-                gameObject.transform.GetChild(0).GetComponent<Outline>().OutlineColor = blue;
+                gameObject.transform.GetChild(0).GetComponent<Outline>().OutlineColor = orange;
                 break;
             case 2:
                 //set the value
@@ -47,7 +47,7 @@ public class ArtifactData : MonoBehaviour
                 //multiply value according to difficulty
                 value = Mathf.RoundToInt(value * difficultyValue);
                 //set colour of outline
-                gameObject.transform.GetChild(0).GetComponent<Outline>().OutlineColor = orange;
+                gameObject.transform.GetChild(0).GetComponent<Outline>().OutlineColor = blue;
                 break;
             case 3:
                 //set the value

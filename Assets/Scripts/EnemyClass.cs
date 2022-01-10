@@ -35,6 +35,8 @@ public class EnemyClass : MonoBehaviour
                 gameObject.GetComponent<Target>().health = 21;
                 //set damage
                 gameObject.GetComponent<EnemyDamage>().damage = 7f * difficultyDamage;
+                //set pitch of audio
+                gameObject.GetComponent<AudioSource>().pitch = 1.2f;
 
                 break;
             //if class 2 (medium size and speed)
@@ -49,6 +51,8 @@ public class EnemyClass : MonoBehaviour
                 gameObject.GetComponent<Target>().health = 28;
                 //set damage
                 gameObject.GetComponent<EnemyDamage>().damage = 12f * difficultyDamage;
+                //set pitch of audio
+                gameObject.GetComponent<AudioSource>().pitch = 1f;
 
                 break;
             //if class 3 (large and slow)
@@ -61,6 +65,8 @@ public class EnemyClass : MonoBehaviour
                 gameObject.GetComponent<Target>().health = 40;
                 //set damage
                 gameObject.GetComponent<EnemyDamage>().damage = 18f * difficultyDamage;
+                //set pitch of audio
+                gameObject.GetComponent<AudioSource>().pitch = 0.8f;
 
                 break;
         }

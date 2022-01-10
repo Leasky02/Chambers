@@ -81,7 +81,6 @@ public class EventController : MonoBehaviour
                 gameStarted = true;
             }
         }
-        Debug.Log(isOutside);
         //take one off score and add one to overall score
         if(switchScore)
         {

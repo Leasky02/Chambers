@@ -7,6 +7,7 @@ public class PauseMenuController : MonoBehaviour
     //variables containing UI element canvases
     [SerializeField] private GameObject artifactCanvas;
     [SerializeField] private GameObject timerCanvas;
+    [SerializeField] private GameObject healthCanvas;
     [SerializeField] private GameObject MenuButtons;
     [SerializeField] private GameObject player;
     //guns
@@ -44,6 +45,7 @@ public class PauseMenuController : MonoBehaviour
         //hide UI elements
         artifactCanvas.SetActive(false);
         timerCanvas.SetActive(false);
+        healthCanvas.SetActive(false);
         //show menuButtons
         MenuButtons.SetActive(true);
 
@@ -72,6 +74,7 @@ public class PauseMenuController : MonoBehaviour
         //show UI elements
         artifactCanvas.SetActive(true);
         timerCanvas.SetActive(true);
+        healthCanvas.SetActive(true);
         //hide menuButtons
         MenuButtons.SetActive(false);
 
